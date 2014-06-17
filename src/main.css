@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'BlairITC';
+  src: url('assets/fonts/BlairITC TT Light.ttf') format('truetype');
+}
+
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+#logo {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10em;
+}
+
+#tagline {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2em;
+    font-size: 2em;
+    font-family: 'BlairITC'
+}
