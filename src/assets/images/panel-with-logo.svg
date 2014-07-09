@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="256.5px" height="193.5px" viewBox="0 0 256.5 193.5" enable-background="new 0 0 256.5 193.5" xml:space="preserve">
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M11.25,0C5.036,0,0,5.039,0,11.25v49.495c0,6.031,3.375,12.062,3.375,18v35.908
+			c0,6.031-3.375,12.062-3.375,18v49.598c0,6.213,5.036,11.25,11.25,11.25h234c6.213,0,11.25-5.037,11.25-11.25v-49.598
+			c0-5.938-3.375-11.969-3.375-18V78.745c0-5.938,3.375-11.969,3.375-18V11.25C256.5,5.039,251.463,0,245.25,0H11.25z"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-176.7539" y1="556.4214" x2="-175.7539" y2="556.4214" gradientTransform="matrix(256.5 0 0 -256.5 45337.375 142818.8438)">
+		<stop  offset="0" style="stop-color:#BABABA"/>
+		<stop  offset="1" style="stop-color:#E8E8E8"/>
+	</linearGradient>
+	<rect clip-path="url(#SVGID_2_)" fill="url(#SVGID_3_)" width="256.5" height="193.5"/>
+</g>
+<path fill="#231815" d="M129.689,77.396h-2.88H2.59c-0.792,0-1.44,0.648-1.44,1.44v33.969c0,0.793,0.648,1.44,1.44,1.44h124.22h2.88
+	H253.91c0.792,0,1.439-0.647,1.439-1.44V78.836c0-0.792-0.647-1.44-1.439-1.44H129.689z"/>
+<path fill="none" stroke="#231815" stroke-width="0.434" stroke-miterlimit="10" d="M129.689,77.396h-2.88H2.59
+	c-0.792,0-1.44,0.648-1.44,1.44v33.969c0,0.793,0.648,1.44,1.44,1.44h124.22h2.88H253.91c0.792,0,1.439-0.647,1.439-1.44V78.836
+	c0-0.792-0.647-1.44-1.439-1.44H129.689z"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" x1="102.638" y1="109.917" x2="102.638" y2="81.637"/>
+<polyline fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" points="98.247,83.042 129.864,88.136 
+	97.895,94.459 "/>
+<rect x="155.132" y="97.621" fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" width="1.801" height="2.986"/>
+<polyline fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" points="155.749,105.223 155.749,109.917 
+	148.983,109.917 148.983,81.637 155.749,81.637 155.749,93.223 "/>
+<line fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" x1="157.937" y1="100.608" x2="158.604" y2="100.608"/>
+<polyline fill="none" stroke="#FFFFFF" stroke-width="0.4" stroke-miterlimit="10" points="144.986,81.571 144.986,100.608 
+	134.635,100.608 136.734,97.973 134.635,97.973 134.635,100.608 126.157,100.608 126.157,98.237 124.207,97.622 124.207,100.608 
+	115.812,100.608 114.684,97.823 113.554,100.608 105.16,100.608 "/>
+</svg>
