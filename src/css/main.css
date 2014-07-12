@@ -40,9 +40,8 @@ body {
     -webkit-transform: translateZ(12px);
 }
 
-#back-band {
-    -webkit-transform: rotateY(180deg);
-    -webkit-transform: translateZ(-12px);
+#panel #back-band {
+    -webkit-transform: rotateY(180deg) translateZ(12px);
 }
 
 .cash {
