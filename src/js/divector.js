@@ -12,24 +12,21 @@ function Divector() {
 
     this.actors = [];
     this.scenes = [];
+    this.renderQueue = [];
 
 }
 
 // Add an actor and returns it's ID for later use
 Divector.prototype.addActor = function(el) {
-
     var actor = new Actor(el);
     actor.id = this.actors.length;
     this.actors.push(actor);
 
     return actor;
-
 };
 
 Divector.prototype.action = function() {
-
     requestAnimationFrame(this.update.bind(this));
-
 };
 
 Divector.prototype.update = function() {
@@ -67,6 +64,7 @@ Divector.prototype.update = function() {
                         if (actor.properties[transition.property] != transition.beginValue + progress) {
                             actor.properties[transition.property] = transition.beginValue + progress;
                             actor.dirty = true;
+                            this.renderQueue.push(actor);
                         }
                     }
                 }
@@ -82,15 +80,14 @@ Divector.prototype.update = function() {
 Divector.prototype.render = function() {
     var i, actor, transformString;
 
-    for (i = 0; i < this.actors.length; i++) {
-        if (this.actors[i].dirty) {
-            actor = this.actors[i];
-            actor.$el.style.webkitTransform = actor.compileTransformString();
-            actor.$el.style.opacity = actor.properties.opacity;
-        }
+    for (i = 0; i < this.renderQueue.length; i++) {
+        actor = this.renderQueue[i];
+        actor.$el.style.webkitTransform = actor.compileTransformString();
+        actor.$el.style.opacity = actor.properties.opacity;
     }
 
-    // Done. Kick off another update
+    // Done. Empty out the renderQueue and kick off another update
+    this.renderQueue = [];
     requestAnimationFrame(this.update.bind(this));
 };
 
@@ -106,8 +103,7 @@ Divector.prototype.addScene = function() {
 
 Divector.prototype.initialize = function() {
 
-    this._window = $(window);
-    this._windowHeight = _window.height();
+    this._windowHeight = window.innerHeight;
 
     for (var i = 0; i < this.actors.length; i++) {
         this.actors[i].initialize();
@@ -151,10 +147,10 @@ Actor.prototype.compileTransformString = function() {
                 break;
             case 'translateX':
             case 'translateY':
+            case 'translateZ':
                 transformString += property + '(' + this.properties[property].toFixed(2) + 'px) ';
                 break;
             case 'scale':
-            case 'translateZ':
                 transformString += property + '(' + this.properties[property].toFixed(2) + ') ';
                 break;
             default:
@@ -188,7 +184,7 @@ Actor.prototype.initializeProperties = function() {
     var transform, scaleX, skewX, skewY, scaleY, translateX, translateY, opacity;
 
     if (this.$el) {
-        this.$el.className += 'actor';
+        this.$el.className += ' actor';
 
         var style = window.getComputedStyle(this.$el, null);
         transform = style.getPropertyValue("-webkit-transform") ||
@@ -220,13 +216,15 @@ Actor.prototype.initializeProperties = function() {
     }
 
     this.properties = {
-        scale: transform ? scaleX : 0,
+        scale: transform ? scaleX : 1,
         rotateX: transform ? 0 : 0,
         rotateY: transform ? 0 : 0,
         rotateZ: transform ? Math.round(Math.atan2(skewX, scaleX) * (180 / Math.PI)) : 0,
         translateX: transform ? translateX : 0,
         translateY: transform ? translateY : 0,
-        translateZ: 0,
+        translateZ: this.id * 0.25,
         opacity: opacity ? opacity : 1
     };
+
+    console.log(this.properties);
 }
