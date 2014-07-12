@@ -6,7 +6,8 @@ function Divector() {
     this._window;
     this._windowHeight = 0;
     this._scrollTop = 0;
-    this._previousScrollTop = 0;
+    this._previousScrollTop = -1;
+    this._previousScene = 0;
     this._currentScene = 0;
     this._sceneCompletion = 0;
 
@@ -30,7 +31,7 @@ Divector.prototype.action = function() {
 };
 
 Divector.prototype.update = function() {
-    var rawDifference, actor, i, j;
+    var rawDifference, actor, transitions, transition, i, j, k;
 
     // Grab new scrollTop;
     this._scrollTop = $('body').scrollTop();
@@ -42,15 +43,82 @@ Divector.prototype.update = function() {
         this._sceneCompletion = rawDifference - this._currentScene;
         this._previousScrollTop = this._scrollTop;
 
-        if (this.scenes[this._currentScene]) {
+        if (this._currentScene != this._previousScene) {
+
+            // We are changing scenes, spend a frame cleaning up and making sure everything is updated to expected positions.
+            // Iterate upwards through all actors with transitions before this scene,
+            // and make sure their current properties match the endValue.
+            // TODO: This might be overkill to go through ALL previous transitions. Give some thought to achieving this more intelligently.
+            for (i = 0; i < this.actors.length; i++) {
+                actor = this.actors[i];
+
+                for (j = 0; j < this._currentScene; j++) {
+                    if (actor.transitions[j]) {
+                        transitions = actor.transitions[j];
+
+                        for (k = 0; k < transitions.length; k++) {
+                            transition = transitions[k];
+
+                            if (actor.properties[transition.property] != transition.endValue) {
+                                actor.properties[transition.property] = transition.endValue;
+                                actor.dirty = true;
+                                if (this.renderQueue.indexOf(actor) < 0) {
+                                    this.renderQueue.push(actor);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // If we are moving back up a scene also make sure all the properties match beginValues from the previous scene.
+            // and endValues from the currentScene.
+            // TODO: Is it enough to only capture the values from the previous scene?
+            // TODO: Seems like we're repeating a lot of very similar loops. Look into consolidating/optimizing.
+            if (this._currentScene < this._previousScene) {
+                for (i = 0; i < this.actors.length; i++) {
+                    actor = this.actors[i];
+                    transitions = actor.transitions[this._previousScene];
+
+                    if (transitions) {
+                        for (j = 0; j < transitions.length; j++) {
+                            transition = transitions[j];
+                            if (actor.properties[transition.property] != transition.beginValue) {
+                                actor.properties[transition.property] = transition.beginValue;
+                                actor.dirty = true;
+                                if (this.renderQueue.indexOf(actor) < 0) {
+                                    this.renderQueue.push(actor);
+                                }
+                            }
+                        }
+                    }
+
+                    transitions = actor.transitions[this._currentScene];
+
+                    if (transitions) {
+                        for (j = 0; j < transitions.length; j++) {
+                            transition = transitions[j];
+                            if (actor.properties[transition.property] != transition.endValue) {
+                                actor.properties[transition.property] = transition.endValue;
+                                actor.dirty = true;
+                                if (this.renderQueue.indexOf(actor) < 0) {
+                                    this.renderQueue.push(actor);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        } else if (this.scenes[this._currentScene]) {
             // Iterate through all the 'actors' that have transitions in this scene.
             for (i = 0; i < this.actors.length; i++) {
                 if (this.actors[i].transitions[this._currentScene]) {
                     actor = this.actors[i];
-                    var transitions = actor.transitions[this._currentScene];
+                    transitions = actor.transitions[this._currentScene];
 
                     for (j = 0; j < transitions.length; j++) {
-                        var transition = transitions[j];
+                        transition = transitions[j];
                         var progress;
 
                         if (this._sceneCompletion < transition.begin) {
@@ -70,6 +138,8 @@ Divector.prototype.update = function() {
                 }
             }
         }
+
+        this._previousScene = this._currentScene;
     }
 
     // Re-render (if there are any changes)
@@ -199,7 +269,6 @@ Actor.prototype.initializeProperties = function() {
         }
 
         if (transform) {
-            console.log(transform);
             var values = transform.split('(')[1];
             values = values.split(')')[0];
             values = values.split(',');
@@ -226,5 +295,4 @@ Actor.prototype.initializeProperties = function() {
         opacity: opacity ? opacity : 1
     };
 
-    console.log(this.properties);
 }

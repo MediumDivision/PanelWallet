@@ -40,6 +40,11 @@ body {
     -webkit-transform: translateZ(12px);
 }
 
+#back-band {
+    -webkit-transform: rotateY(180deg);
+    -webkit-transform: translateZ(-12px);
+}
+
 .cash {
     height: 96%;
     width: 84.5%;
