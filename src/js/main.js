@@ -1,8 +1,11 @@
 var controller = new Divector();
+
 var panel = controller.addActor('#panel');
 var tagline = controller.addActor('#tagline');
 var crisp = controller.addActor('#crisp');
 var flexible = controller.addActor('#flexible');
+var safe = controller.addActor('#safe');
+
 var cash1 = controller.addActor('#cash1');
 var cashImage1 = controller.addActor('#cashImg1');
 var cash2 = controller.addActor('#cash2');

@@ -20,7 +20,17 @@ body {
 }
 
 #panel div {
-    position: fixed;
+    position: absolute;
+}
+
+/* TODO: This already looks pretty cool, but it definitely needs to be perfected */
+#side-panel {
+    -webkit-transform: rotateX(90deg) rotateZ(90deg) translateZ(180px);
+    height: 135%;
+    width: 11.7%;
+    left: 50%;
+    margin-left: -5.85%;
+    margin-top: -13.25%;
 }
 
 #panel .panel {
@@ -37,7 +47,7 @@ body {
     width: 100%;
     top: 50%;
     margin-top: -7%;
-    -webkit-transform: translateZ(2px);
+    -webkit-transform: translateZ(25px);
 }
 
 #panel #back-band {
@@ -49,7 +59,7 @@ body {
     width: 84.5%;
     top: 2%;
     left: 7.75%;
-    -webkit-transform: translateX(-5000px) translateZ(1px); /* Arbitrary, just move them off the screen */
+    -webkit-transform: translateX(-5000px) translateZ(20px); /* Arbitrary, just move them off the screen */
 }
 
 .card {
@@ -105,6 +115,17 @@ body {
     top: 0%;
     width: 50%;
     left: 0%;
+    opacity: 0;
+    text-align: center;
+    font-family: 'BlairITC', 'sans-serif';
+    font-weight: bold;
+}
+
+#safe {
+    position: fixed;
+    top: 0%;
+    width: 50%;
+    right: 0%;
     opacity: 0;
     text-align: center;
     font-family: 'BlairITC', 'sans-serif';
