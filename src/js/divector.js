@@ -254,45 +254,141 @@ Actor.prototype.initializeProperties = function() {
     var transform, scaleX, skewX, skewY, scaleY, translateX, translateY, opacity;
 
     if (this.$el) {
-        this.$el.className += ' actor';
-
         var style = window.getComputedStyle(this.$el, null);
-        transform = style.getPropertyValue("-webkit-transform") ||
-            style.getPropertyValue("-moz-transform") ||
-            style.getPropertyValue("-ms-transform") ||
-            style.getPropertyValue("-o-transform") ||
-            style.getPropertyValue("transform") ||
-            undefined;
-
-        if (transform === 'none') {
-            transform = undefined;
-        }
-
-        if (transform) {
-            var values = transform.split('(')[1];
-            values = values.split(')')[0];
-            values = values.split(',');
-
-            scaleX = Number(values[0]);
-            skewX = Number(values[1]);
-            skewY = Number(values[2]);
-            scaleY = Number(values[3]);
-            translateX = Number(values[4]);
-            translateY = Number(values[5]);
-        }
-
+        transform = this.getTransform();
+        console.log("TRANSFORM:", transform);
         opacity = Number(style.getPropertyValue("opacity"));
     }
 
     this.properties = {
-        scale: transform ? scaleX : 1,
-        rotateX: transform ? 0 : 0,
-        rotateY: transform ? 0 : 0,
-        rotateZ: transform ? Math.round(Math.atan2(skewX, scaleX) * (180 / Math.PI)) : 0,
-        translateX: transform ? translateX : 0,
-        translateY: transform ? translateY : 0,
-        translateZ: this.id * 0.25,
+        scale: transform ? transform.scale : 1,
+        rotateX: transform ? transform.rotate.x : 0,
+        rotateY: transform ? transform.rotate.y : 0,
+        rotateZ: transform ? transform.rotate.z : 0,
+        translateX: transform ? transform.translate.x : 0,
+        translateY: transform ? transform.translate.y : 0,
+        translateZ: transform ? transform.translate.z : 0,
         opacity: opacity ? opacity : 1
     };
 
+}
+
+Actor.prototype.getTransform = function() {
+
+    var style = window.getComputedStyle(this.$el, null);
+    transform = style.getPropertyValue("-webkit-transform") ||
+        style.getPropertyValue("-moz-transform") ||
+        style.getPropertyValue("-ms-transform") ||
+        style.getPropertyValue("-o-transform") ||
+        style.getPropertyValue("transform") ||
+        undefined;
+
+    if (transform === 'none') {
+        transform = undefined;
+    }
+
+    if (transform) {
+        var matrix = parseMatrix(transform),
+            rotateY = Math.asin(-matrix.m13),
+            rotateX,
+            rotateZ;
+
+        if (Math.cos(rotateY) !== 0) {
+            rotateX = Math.atan2(matrix.m23, matrix.m33);
+            rotateZ = Math.atan2(matrix.m12, matrix.m11);
+        } else {
+            rotateX = Math.atan2(-matrix.m31, matrix.m22);
+            rotateZ = 0;
+        }
+        return {
+            rotate: {
+                x: rotateX * (180 / Math.PI),
+                y: rotateY * (180 / Math.PI),
+                z: rotateZ * (180 / Math.PI)
+            },
+            translate: {
+                x: matrix.m41,
+                y: matrix.m42,
+                z: Math.abs(matrix.m43)
+            },
+            scale: Math.abs(matrix.m11)
+        };
+
+    } else {
+        return undefined;
+    }
+
+};
+
+/* Parses a matrix string and returns a 4x4 matrix
+   borrowed from http://blog.keithclark.co.uk/calculating-element-vertex-data-from-css-transforms/
+---------------------------------------------------------------- */
+
+function parseMatrix(matrixString) {
+    var c = matrixString.split(/\s*[(),]\s*/).slice(1, -1),
+        matrix;
+
+    if (c.length === 6) {
+        // 'matrix()' (3x2)
+        matrix = {
+            m11: +c[0],
+            m21: +c[2],
+            m31: 0,
+            m41: +c[4],
+            m12: +c[1],
+            m22: +c[3],
+            m32: 0,
+            m42: +c[5],
+            m13: 0,
+            m23: 0,
+            m33: 1,
+            m43: 0,
+            m14: 0,
+            m24: 0,
+            m34: 0,
+            m44: 1
+        };
+    } else if (c.length === 16) {
+        // matrix3d() (4x4)
+        matrix = {
+            m11: +c[0],
+            m21: +c[4],
+            m31: +c[8],
+            m41: +c[12],
+            m12: +c[1],
+            m22: +c[5],
+            m32: +c[9],
+            m42: +c[13],
+            m13: +c[2],
+            m23: +c[6],
+            m33: +c[10],
+            m43: +c[14],
+            m14: +c[3],
+            m24: +c[7],
+            m34: +c[11],
+            m44: +c[15]
+        };
+
+    } else {
+        // handle 'none' or invalid values.
+        matrix = {
+            m11: 1,
+            m21: 0,
+            m31: 0,
+            m41: 0,
+            m12: 0,
+            m22: 1,
+            m32: 0,
+            m42: 0,
+            m13: 0,
+            m23: 0,
+            m33: 1,
+            m43: 0,
+            m14: 0,
+            m24: 0,
+            m34: 0,
+            m44: 1
+        };
+    }
+    return matrix;
 }

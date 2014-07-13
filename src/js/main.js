@@ -13,6 +13,12 @@ var cash4 = controller.addActor('#cash4');
 var cashImage4 = controller.addActor('#cashImg4');
 var cash5 = controller.addActor('#cash5');
 var cashImage5 = controller.addActor('#cashImg5');
+var card1 = controller.addActor('#credit-card');
+var card2 = controller.addActor('#bank-card');
+var card3 = controller.addActor('#transit-card');
+var card4 = controller.addActor('#insurance-card');
+var card5 = controller.addActor('#drivers-license-card');
+var card6 = controller.addActor('#coin-card');
 
 $(function() {
 
@@ -271,6 +277,139 @@ $(function() {
             beginValue: 0,
             endValue: 1,
             begin: 0.5,
+            end: 1
+        });
+
+
+    // Bring up cards
+    controller.addScene()
+        .addTransition(card1, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0,
+            end: 0.3
+        })
+        .addTransition(card2, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0.1,
+            end: 0.4
+        })
+        .addTransition(card3, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0.2,
+            end: 0.5
+        })
+        .addTransition(card4, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0.3,
+            end: 0.6
+        })
+        .addTransition(card5, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0.4,
+            end: 0.7
+        })
+        .addTransition(card6, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
+            endValue: 0,
+            begin: 0.5,
+            end: 0.8
+        })
+        .addTransition(card1, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 2.3,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card2, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 2.1,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card3, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 1.9,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card4, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 1.7,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card5, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 1.5,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card6, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: quarterScreen * 1.3,
+            begin: 0,
+            end: 0
+        });
+
+    // Slide cards under band
+    controller.addScene()
+    .addTransition(card1, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 2.3,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(card2, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 2.1,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(card3, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 1.9,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(card4, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 1.7,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(card5, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 1.5,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(card6, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: quarterScreen * 1.3,
+            begin: 0,
             end: 1
         });
 

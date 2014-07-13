@@ -37,11 +37,11 @@ body {
     width: 100%;
     top: 50%;
     margin-top: -7%;
-    -webkit-transform: translateZ(12px);
+    -webkit-transform: translateZ(2px);
 }
 
 #panel #back-band {
-    -webkit-transform: rotateY(180deg) translateZ(12px);
+    -webkit-transform: rotateY(180deg) translateZ(2px);
 }
 
 .cash {
@@ -49,7 +49,19 @@ body {
     width: 84.5%;
     top: 2%;
     left: 7.75%;
-    opacity: 0;
+    -webkit-transform: translateX(-5000px) translateZ(1px); /* Arbitrary, just move them off the screen */
+}
+
+.card {
+    height: 79%;
+    width: 96%;
+    top: 10.5%;
+    left: 2%;
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(1px);
+}
+
+.card img {
+    -webkit-transform: rotateZ(180deg);
 }
 
 #cashImg1 {
@@ -71,9 +83,7 @@ body {
 #tagline {
     position: fixed;
     top: 100%;
-    width: 60%;
-    left: 50%;
-    margin-left: -30%;
+    width: 100%;
     opacity: 0;
     text-align: center;
     font-family: 'BlairITC', 'sans-serif';
