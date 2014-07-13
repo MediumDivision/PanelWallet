@@ -5,10 +5,13 @@ var tagline = controller.addActor('#tagline');
 var crisp = controller.addActor('#crisp');
 var flexible = controller.addActor('#flexible');
 var safe = controller.addActor('#safe');
+var secure = controller.addActor('#secure');
 
 var rfid1 = controller.addActor('#rfid1');
 var rfid2 = controller.addActor('#rfid2');
 var rfid3 = controller.addActor('#rfid3');
+
+var jeans = controller.addActor('#jeans');
 
 var cash1 = controller.addActor('#cash1');
 var cashImage1 = controller.addActor('#cashImg1');
@@ -35,11 +38,11 @@ $(function() {
 
     // Initialize scene container height
     $('.scene').each(function(idx, elem) {
-        elem.style.height = _windowHeight + 'px';
+        elem.style.height = 1.5 * _windowHeight + 'px';
     });
 
     var quarterScreen = _windowWidth / 4;
-    var panelHeight = _windowHeight / 3;
+    var panelHeight = _windowHeight / 2.66;
     var panelWidth = panelHeight * 1.325;
     var thirdLeft = panelHeight;
 
@@ -57,8 +60,23 @@ $(function() {
         marginLeft: -1 * (panelHeight / 4)
     });
 
-    $('#crisp, #flexible, #safe').css({
-        top: panelHeight / 2
+    $('#jeans').css({
+        width: panelHeight * 3.25
+    });
+
+    $('.title').css({
+        top: panelHeight / 4,
+        fontSize: panelHeight / 4
+    });
+
+    console.log($('#side-panel'));
+
+    $('#side-panel').css({
+        webkitTransform: 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)'
+    });
+
+    $('#tagline').css({
+        //lineHeight: panelHeight / 2
     });
 
     // Zoom out logo, bring in tagline
@@ -73,7 +91,7 @@ $(function() {
         .addTransition(tagline, {
             property: 'translateY',
             beginValue: 0,
-            endValue: -150,
+            endValue: -1 * panelHeight / 2,
             begin: 0.25,
             end: 0.75
         })
@@ -90,8 +108,8 @@ $(function() {
     controller.addScene()
         .addTransition(tagline, {
             property: 'translateY',
-            beginValue: -150,
-            endValue: -350,
+            beginValue: -1 * panelHeight / 2,
+            endValue: -1 * panelHeight,
             begin: 0,
             end: 0.25
         })
@@ -112,7 +130,7 @@ $(function() {
         .addTransition(panel, {
             property: 'translateY',
             beginValue: 0,
-            endValue: -1 * quarterScreen,
+            endValue: -0.75 * panelHeight,
             begin: 0.5,
             end: 1.0
         })
@@ -164,35 +182,35 @@ $(function() {
         .addTransition(cash1, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(cash2, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(cash3, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(cash4, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(cash5, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         });
@@ -236,35 +254,35 @@ $(function() {
         })
         .addTransition(cash1, {
             property: 'translateY',
-            beginValue: quarterScreen * 2,
+            beginValue: panelHeight * 1.5,
             endValue: 0,
             begin: 0.5,
             end: 1.0
         })
         .addTransition(cash2, {
             property: 'translateY',
-            beginValue: quarterScreen * 2,
+            beginValue: panelHeight * 1.5,
             endValue: 0,
             begin: 0.5,
             end: 1.0
         })
         .addTransition(cash3, {
             property: 'translateY',
-            beginValue: quarterScreen * 2,
+            beginValue: panelHeight * 1.5,
             endValue: 0,
             begin: 0.5,
             end: 1.0
         })
         .addTransition(cash4, {
             property: 'translateY',
-            beginValue: quarterScreen * 2,
+            beginValue: panelHeight * 1.5,
             endValue: 0,
             begin: 0.5,
             end: 1.0
         })
         .addTransition(cash5, {
             property: 'translateY',
-            beginValue: quarterScreen * 2,
+            beginValue: panelHeight * 1.5,
             endValue: 0,
             begin: 0.5,
             end: 1.0
@@ -341,42 +359,42 @@ $(function() {
         .addTransition(card1, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2.3,
+            endValue: panelHeight * 2,
             begin: 0,
             end: 0
         })
         .addTransition(card2, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 2.1,
+            endValue: panelHeight * 1.8,
             begin: 0,
             end: 0
         })
         .addTransition(card3, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 1.9,
+            endValue: panelHeight * 1.6,
             begin: 0,
             end: 0
         })
         .addTransition(card4, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 1.7,
+            endValue: panelHeight * 1.4,
             begin: 0,
             end: 0
         })
         .addTransition(card5, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 1.5,
+            endValue: panelHeight * 1.2,
             begin: 0,
             end: 0
         })
         .addTransition(card6, {
             property: 'translateY',
             beginValue: 0,
-            endValue: quarterScreen * 1.3,
+            endValue: panelHeight * 1,
             begin: 0,
             end: 0
         });
@@ -386,42 +404,42 @@ $(function() {
         .addTransition(card1, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 2.3,
+            beginValue: panelHeight * 2,
             begin: 0,
             end: 1
         })
         .addTransition(card2, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 2.1,
+            beginValue: panelHeight * 1.8,
             begin: 0,
             end: 1
         })
         .addTransition(card3, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 1.9,
+            beginValue: panelHeight * 1.6,
             begin: 0,
             end: 1
         })
         .addTransition(card4, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 1.7,
+            beginValue: panelHeight * 1.4,
             begin: 0,
             end: 1
         })
         .addTransition(card5, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 1.5,
+            beginValue: panelHeight * 1.2,
             begin: 0,
             end: 1
         })
         .addTransition(card6, {
             property: 'translateY',
             endValue: 0,
-            beginValue: quarterScreen * 1.3,
+            beginValue: panelHeight * 1,
             begin: 0,
             end: 1
         });
@@ -438,7 +456,7 @@ $(function() {
         .addTransition(panel, {
             property: 'translateZ',
             beginValue: 0,
-            endValue: -0.5 * quarterScreen,
+            endValue: -0.5 * panelHeight,
             begin: 0,
             end: 1
         })
@@ -499,6 +517,64 @@ $(function() {
             beginValue: 0.9,
             endValue: 1,
             begin: 0.66,
+            end: 1
+        });
+
+    // And fade them out
+    controller.addScene()
+        .addTransition(rfid1, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0,
+            end: 0.33
+        })
+        .addTransition(rfid2, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0.33,
+            end: 0.66
+        })
+        .addTransition(rfid3, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0.66,
+            end: 1
+        });
+
+    // Rotate panel back to cash-side. Fade in jeans.
+    controller.addScene()
+        .addTransition(panel, {
+            property: 'rotateY',
+            beginValue: 90,
+            endValue: 0,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(safe, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0,
+            end: 0.5
+        })
+        .addTransition(secure, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0.5,
+            end: 1
+        });
+
+    // Rotate panel into jean pocket.
+    controller.addScene()
+        .addTransition(panel, {
+            property: 'rotateZ',
+            beginValue: -90,
+            endValue: 90,
+            begin: 0,
             end: 1
         });
 

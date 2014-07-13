@@ -38,7 +38,7 @@ Divector.prototype.update = function() {
 
     // If it is different we must recalculate
     if (this._scrollTop != this._previousScrollTop) {
-        rawDifference = this._scrollTop / this._windowHeight;
+        rawDifference = this._scrollTop / (this._windowHeight * 1.5);
         this._currentScene = rawDifference | 0; // Bitwise op in place of rounding (faster, I swear)
         this._sceneCompletion = rawDifference - this._currentScene;
         this._previousScrollTop = this._scrollTop;
