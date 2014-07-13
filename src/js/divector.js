@@ -256,8 +256,8 @@ Actor.prototype.initializeProperties = function() {
     if (this.$el) {
         var style = window.getComputedStyle(this.$el, null);
         transform = this.getTransform();
-        console.log("TRANSFORM:", transform);
         opacity = Number(style.getPropertyValue("opacity"));
+        this.$el.className += this.$el.className ? ' actor' : 'actor';
     }
 
     this.properties = {

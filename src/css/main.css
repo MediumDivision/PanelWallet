@@ -124,12 +124,49 @@ body {
 #safe {
     position: fixed;
     top: 0%;
-    width: 50%;
+    width: 100%;
     right: 0%;
     opacity: 0;
     text-align: center;
     font-family: 'BlairITC', 'sans-serif';
     font-weight: bold;
+}
+
+#rfid-container {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+#rfid-container div {
+    position: absolute;
+}
+
+#rfid1 {
+    height: 16%;
+    width: 10%;
+    right: 0;
+    top: 50%;
+    margin-top: -12%;
+    opacity: 0;
+}
+
+#rfid2 {
+    height: 40%;
+    width: 17%;
+    left: 50%;
+    top: 50%;
+    margin-left: -5%;
+    margin-top: -28%;
+    opacity: 0;
+}
+
+#rfid3 {
+    height: 100%;
+    width: 25.4%;
+    left: 0;
+    opacity: 0;
 }
 
 .scene {

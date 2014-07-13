@@ -6,6 +6,10 @@ var crisp = controller.addActor('#crisp');
 var flexible = controller.addActor('#flexible');
 var safe = controller.addActor('#safe');
 
+var rfid1 = controller.addActor('#rfid1');
+var rfid2 = controller.addActor('#rfid2');
+var rfid3 = controller.addActor('#rfid3');
+
 var cash1 = controller.addActor('#cash1');
 var cashImage1 = controller.addActor('#cashImg1');
 var cash2 = controller.addActor('#cash2');
@@ -39,14 +43,21 @@ $(function() {
     var panelWidth = panelHeight * 1.325;
     var thirdLeft = panelHeight;
 
-    $('#panel').css({
+    $('#panel, #rfid').css({
         height: panelHeight,
         width: panelWidth,
         marginTop: -1 * (panelHeight / 2),
         marginLeft: -1 * (panelWidth / 2)
     });
 
-    $('#crisp, #flexible').css({
+    $('#rfid-container').css({
+        height: panelWidth,
+        width: panelHeight,
+        marginTop: -1 * (panelWidth / 2),
+        marginLeft: -1 * (panelHeight / 4)
+    });
+
+    $('#crisp, #flexible, #safe').css({
         top: panelHeight / 2
     });
 
@@ -283,7 +294,6 @@ $(function() {
             end: 1
         });
 
-
     // Bring up cards
     controller.addScene()
         .addTransition(card1, {
@@ -373,7 +383,7 @@ $(function() {
 
     // Slide cards under band
     controller.addScene()
-    .addTransition(card1, {
+        .addTransition(card1, {
             property: 'translateY',
             endValue: 0,
             beginValue: quarterScreen * 2.3,
@@ -413,6 +423,82 @@ $(function() {
             endValue: 0,
             beginValue: quarterScreen * 1.3,
             begin: 0,
+            end: 1
+        });
+
+    // flip panel 90 degrees and push to other side, hide 'flexible', reveal 'safe'
+    controller.addScene()
+        .addTransition(panel, {
+            property: 'rotateY',
+            beginValue: 180,
+            endValue: 90,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(panel, {
+            property: 'translateZ',
+            beginValue: 0,
+            endValue: -0.5 * quarterScreen,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(flexible, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0,
+            end: 0.5
+        })
+        .addTransition(safe, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0.5,
+            end: 1
+        });
+
+    // Fade in RFID signals
+    controller.addScene()
+        .addTransition(rfid1, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0,
+            end: 0.33
+        })
+        .addTransition(rfid2, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0.33,
+            end: 0.66
+        })
+        .addTransition(rfid3, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0.66,
+            end: 1
+        })
+        .addTransition(rfid1, {
+            property: 'scale',
+            beginValue: 0.9,
+            endValue: 1,
+            begin: 0,
+            end: 0.33
+        })
+        .addTransition(rfid2, {
+            property: 'scale',
+            beginValue: 0.9,
+            endValue: 1,
+            begin: 0.33,
+            end: 0.66
+        })
+        .addTransition(rfid3, {
+            property: 'scale',
+            beginValue: 0.9,
+            endValue: 1,
+            begin: 0.66,
             end: 1
         });
 
