@@ -1,17 +1,27 @@
 var controller = new Divector();
+controller.changeScene = function(newScene) {
+
+    // Queue current animating elements for cleanup
+    var animatedElems = document.getElementsByClassName('rain');
+    for (var i = 0; i < animatedElems.length; i++) {
+        animatedElems[i].className += ' destroy';
+    }
+
+    // Switch to new animation if necessary
+    if (newScene === 0) {
+        randomCash();
+    } else if (newScene === 1) {
+        randomCards();
+    }
+
+};
 
 var panel = controller.addActor('#panel');
-var tagline = controller.addActor('#tagline');
-var crisp = controller.addActor('#crisp');
-var flexible = controller.addActor('#flexible');
-var safe = controller.addActor('#safe');
-var secure = controller.addActor('#secure');
+var jeans = controller.addActor('#jeans');
 
 var rfid1 = controller.addActor('#rfid1');
 var rfid2 = controller.addActor('#rfid2');
 var rfid3 = controller.addActor('#rfid3');
-
-var jeans = controller.addActor('#jeans');
 
 var cash1 = controller.addActor('#cash1');
 var cashImage1 = controller.addActor('#cashImg1');
@@ -30,19 +40,28 @@ var card4 = controller.addActor('#insurance-card');
 var card5 = controller.addActor('#drivers-license-card');
 var card6 = controller.addActor('#coin-card');
 
+var _window = 0;
+var _windowHeight = 0;
+var _windowWidth = 0;
+
 $(function() {
 
-    var _window = $(window);
-    var _windowHeight = _window.height();
-    var _windowWidth = _window.width();
+    _window = $(window);
+    _windowHeight = _window.height();
+    _windowWidth = _window.width();
 
     // Initialize scene container height
     $('.scene').each(function(idx, elem) {
-        elem.style.height = 1.5 * _windowHeight + 'px';
+        elem.style.height = _windowHeight + 'px';
+    });
+
+    $('#photo-gallery').css({
+        height: 'auto',
+        float: 'left'
     });
 
     var quarterScreen = _windowWidth / 4;
-    var panelHeight = _windowHeight / 2.66;
+    var panelHeight = _windowHeight / 2.5;
     var panelWidth = panelHeight * 1.325;
     var thirdLeft = panelHeight;
 
@@ -64,62 +83,66 @@ $(function() {
         width: panelHeight * 3.25
     });
 
-    $('.title').css({
-        top: panelHeight / 4,
-        fontSize: panelHeight / 4
-    });
-
-    console.log($('#side-panel'));
-
     $('#side-panel').css({
         webkitTransform: 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)'
     });
 
-    $('#tagline').css({
-        //lineHeight: panelHeight / 2
+    // $('.copy').css({
+    //     width: panelHeight * 1.4
+    // });
+
+    // $('.right').css({
+    //     left: '66%',
+    //     marginLeft: -1 * panelHeight * 0.7
+    // });
+
+    // $('.left').css({
+    //     left: '33%',
+    //     marginLeft: -1 * panelHeight * 0.7
+    // });
+
+    // $('.center').css({
+    //     left: '50%',
+    //     marginLeft: -1 * panelHeight * 0.7,
+    //     width: panelHeight * 1.4
+    // });
+
+    document.addEventListener('webkitAnimationIteration', function(e) {
+        var srcElement = e.srcElement;
+
+        if (srcElement.className.indexOf('destroy') >= 0) {
+            document.getElementById('animation-container').removeChild(srcElement);
+        }
     });
 
-    // Zoom out logo, bring in tagline
+    // Cash rain
+    controller.addScene();
+
+    // Card rain
+    controller.addScene();
+
+    // Introduce product
+    controller.addScene()
+        .addTransition(panel, {
+            property: 'translateY',
+            beginValue: _windowHeight * 1.5,
+            endValue: 0,
+            begin: 0,
+            end: 1.0
+        });
+
+    // Introduce product
     controller.addScene()
         .addTransition(panel, {
             property: 'scale',
-            beginValue: 5,
+            beginValue: 0.5,
             endValue: 1,
             begin: 0,
             end: 0.75
-        })
-        .addTransition(tagline, {
-            property: 'translateY',
-            beginValue: 0,
-            endValue: -1 * panelHeight / 2,
-            begin: 0.25,
-            end: 0.75
-        })
-        .addTransition(tagline, {
-            property: 'opacity',
-            beginValue: 0,
-            endValue: 1,
-            begin: 0.35,
-            end: 0.5
         });
-    // *******************************
 
-    // Clear tagline, rotate logo, push to side, bring in 'Crisp' text
+    // Rotate and push to side
     controller.addScene()
-        .addTransition(tagline, {
-            property: 'translateY',
-            beginValue: -1 * panelHeight / 2,
-            endValue: -1 * panelHeight,
-            begin: 0,
-            end: 0.25
-        })
-        .addTransition(tagline, {
-            property: 'opacity',
-            beginValue: 1,
-            endValue: 0,
-            begin: 0,
-            end: 0.2
-        })
         .addTransition(panel, {
             property: 'rotateZ',
             beginValue: 0,
@@ -133,13 +156,6 @@ $(function() {
             endValue: -0.75 * panelHeight,
             begin: 0.5,
             end: 1.0
-        })
-        .addTransition(crisp, {
-            property: 'opacity',
-            beginValue: 0,
-            endValue: 1,
-            begin: 0.75,
-            end: 1
         });
 
     // Bring up cash
@@ -296,20 +312,6 @@ $(function() {
             endValue: 180,
             begin: 0,
             end: 1
-        })
-        .addTransition(crisp, {
-            property: 'opacity',
-            beginValue: 1,
-            endValue: 0,
-            begin: 0,
-            end: 0.5
-        })
-        .addTransition(flexible, {
-            property: 'opacity',
-            beginValue: 0,
-            endValue: 1,
-            begin: 0.5,
-            end: 1
         });
 
     // Bring up cards
@@ -335,112 +337,112 @@ $(function() {
             begin: 0.2,
             end: 0.5
         })
-        .addTransition(card4, {
-            property: 'translateX',
-            beginValue: 1 * _windowHeight,
-            endValue: 0,
-            begin: 0.3,
-            end: 0.6
-        })
-        .addTransition(card5, {
-            property: 'translateX',
-            beginValue: 1 * _windowHeight,
-            endValue: 0,
-            begin: 0.4,
-            end: 0.7
-        })
-        .addTransition(card6, {
-            property: 'translateX',
-            beginValue: 1 * _windowHeight,
-            endValue: 0,
-            begin: 0.5,
-            end: 0.8
-        })
         .addTransition(card1, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 2,
+            endValue: panelHeight * 1.7,
             begin: 0,
             end: 0
         })
         .addTransition(card2, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.8,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(card3, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.6,
+            endValue: panelHeight * 1.3,
             begin: 0,
             end: 0
         })
         .addTransition(card4, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.4,
+            endValue: panelHeight * 1.7,
             begin: 0,
             end: 0
         })
         .addTransition(card5, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.2,
+            endValue: panelHeight * 1.5,
             begin: 0,
             end: 0
         })
         .addTransition(card6, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1,
+            endValue: panelHeight * 1.3,
             begin: 0,
             end: 0
+        })
+        .addTransition(card1, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: panelHeight * 1.7,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(card2, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: panelHeight * 1.5,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(card3, {
+            property: 'translateY',
+            endValue: 0,
+            beginValue: panelHeight * 1.3,
+            begin: 0.5,
+            end: 1
         });
 
     // Slide cards under band
     controller.addScene()
-        .addTransition(card1, {
-            property: 'translateY',
+        .addTransition(card4, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
             endValue: 0,
-            beginValue: panelHeight * 2,
             begin: 0,
-            end: 1
+            end: 0.3
         })
-        .addTransition(card2, {
-            property: 'translateY',
+        .addTransition(card5, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
             endValue: 0,
-            beginValue: panelHeight * 1.8,
-            begin: 0,
-            end: 1
+            begin: 0.1,
+            end: 0.4
         })
-        .addTransition(card3, {
-            property: 'translateY',
+        .addTransition(card6, {
+            property: 'translateX',
+            beginValue: 1 * _windowHeight,
             endValue: 0,
-            beginValue: panelHeight * 1.6,
-            begin: 0,
-            end: 1
+            begin: 0.2,
+            end: 0.5
         })
         .addTransition(card4, {
             property: 'translateY',
             endValue: 0,
-            beginValue: panelHeight * 1.4,
-            begin: 0,
+            beginValue: panelHeight * 1.7,
+            begin: 0.5,
             end: 1
         })
         .addTransition(card5, {
             property: 'translateY',
             endValue: 0,
-            beginValue: panelHeight * 1.2,
-            begin: 0,
+            beginValue: panelHeight * 1.5,
+            begin: 0.5,
             end: 1
         })
         .addTransition(card6, {
             property: 'translateY',
             endValue: 0,
-            beginValue: panelHeight * 1,
-            begin: 0,
+            beginValue: panelHeight * 1.3,
+            begin: 0.5,
             end: 1
         });
 
@@ -458,20 +460,6 @@ $(function() {
             beginValue: 0,
             endValue: -0.5 * panelHeight,
             begin: 0,
-            end: 1
-        })
-        .addTransition(flexible, {
-            property: 'opacity',
-            beginValue: 1,
-            endValue: 0,
-            begin: 0,
-            end: 0.5
-        })
-        .addTransition(safe, {
-            property: 'opacity',
-            beginValue: 0,
-            endValue: 1,
-            begin: 0.5,
             end: 1
         });
 
@@ -552,20 +540,6 @@ $(function() {
             endValue: 0,
             begin: 0,
             end: 1
-        })
-        .addTransition(safe, {
-            property: 'opacity',
-            beginValue: 1,
-            endValue: 0,
-            begin: 0,
-            end: 0.5
-        })
-        .addTransition(secure, {
-            property: 'opacity',
-            beginValue: 0,
-            endValue: 1,
-            begin: 0.5,
-            end: 1
         });
 
     // Rotate panel into jean pocket.
@@ -582,3 +556,64 @@ $(function() {
     controller.action(); //!
 
 });
+
+function randomCash() {
+    for (var i = 0; i < 10; i++) {
+        var srcSelector = Math.round(Math.random());
+        var src = 'assets/images/cash-front.svg';
+        if (srcSelector) {
+            src = 'assets/images/cash-back.svg';
+        }
+
+        var div = document.createElement('div');
+        div.className = 'rain';
+        div.style.left = (Math.random() * (_windowWidth - (-100)) + (-100)) + 'px';
+        div.style.webkitAnimationDelay = Math.random() * 5 + 's';
+        div.style.webkitAnimationIterationCount = 'infinite';
+
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.webkitTransform = 'scale(' + (Math.random() * (1 - 0.33) + 0.33) + ') rotate(' + Math.random() * 180 + 'deg)';
+
+        div.appendChild(img);
+        document.getElementById('animation-container').appendChild(div);
+    }
+}
+
+function randomCards() {
+    for (var i = 0; i < 10; i++) {
+        var srcSelector = Math.round(Math.random() * 4);
+        var src = 'assets/images/credit-card.svg';
+        switch (srcSelector) {
+            case 1:
+                src = 'assets/images/bank-card.svg';
+                break;
+            case 2:
+                src = 'assets/images/transit-card.svg';
+                break;
+            case 3:
+                src = 'assets/images/insurance-card.svg';
+                break;
+            case 4:
+                src = 'assets/images/drivers-license-card.svg';
+                break;
+        }
+
+        var div = document.createElement('div');
+        div.className = 'rain';
+        div.style.left = (Math.random() * (_windowWidth - (-100)) + (-100)) + 'px';
+        div.style.webkitAnimationDelay = Math.random() * 5 + 's';
+        div.style.webkitAnimationIterationCount = 'infinite';
+
+        var img = document.createElement('img');
+        img.src = src;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.webkitTransform = 'scale(' + (Math.random() * (1 - 0.33) + 0.33) + ') rotate(' + Math.random() * 180 + 'deg)';
+
+        div.appendChild(img);
+        document.getElementById('animation-container').appendChild(div);
+    }
+}

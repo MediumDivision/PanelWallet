@@ -7,7 +7,7 @@ function Divector() {
     this._windowHeight = 0;
     this._scrollTop = 0;
     this._previousScrollTop = -1;
-    this._previousScene = 0;
+    this._previousScene = -1;
     this._currentScene = 0;
     this._sceneCompletion = 0;
 
@@ -38,14 +38,20 @@ Divector.prototype.update = function() {
 
     // If it is different we must recalculate
     if (this._scrollTop != this._previousScrollTop) {
-        rawDifference = this._scrollTop / (this._windowHeight * 1.5);
+        rawDifference = this._scrollTop / this._windowHeight;
         this._currentScene = rawDifference | 0; // Bitwise op in place of rounding (faster, I swear)
         this._sceneCompletion = rawDifference - this._currentScene;
         this._previousScrollTop = this._scrollTop;
 
         if (this._currentScene != this._previousScene) {
+            // We are changing scenes.
 
-            // We are changing scenes, spend a frame cleaning up and making sure everything is updated to expected positions.
+            // Fire off the callback if we have one
+            if (typeof this.changeScene === 'function') {
+                this.changeScene(this._currentScene);
+            }
+
+            // Spend a frame cleaning up and making sure everything is updated to expected positions.
             // Iterate upwards through all actors with transitions before this scene,
             // and make sure their current properties match the endValue.
             // TODO: This might be overkill to go through ALL previous transitions. Give some thought to achieving this more intelligently.
