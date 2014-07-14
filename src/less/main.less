@@ -1,3 +1,5 @@
+@import (inline) "../css/normalize.css";
+
 /* apply a natural box layout model to all elements */
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
@@ -37,6 +39,8 @@ body {
     background-image: url('../assets/images/cartographer.png');
     background-position: top left;
     border-top: 10px solid #3f3f3f;
+    float: left;
+    height: auto;
 }
 
 #photo-gallery div {
@@ -124,12 +128,19 @@ body {
 }
 
 /* TODO: This already looks pretty cool, but it definitely needs to be perfected */
-#side-panel {
+.profile {
     height: 135%;
     width: 11.7%;
     left: 50%;
     margin-left: -5.85%;
     margin-top: -13.25%;
+    -webkit-backface-visibility: hidden;
+}
+
+#side-panel img {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #panel .panel {
@@ -146,7 +157,7 @@ body {
     width: 100%;
     top: 50%;
     margin-top: -7%;
-    -webkit-transform: translateZ(25px);
+    -webkit-transform: translateZ(10px);
 }
 
 #panel #back-band {
@@ -158,7 +169,7 @@ body {
     width: 94%;
     top: 2%;
     left: 5%;
-    -webkit-transform: translateX(-5000px) translateZ(20px); /* Arbitrary, just move them off the screen */
+    -webkit-transform: translateX(-5000px) translateZ(5px); /* Arbitrary, just move them off the screen */
     -webkit-backface-visibility: hidden;
 }
 

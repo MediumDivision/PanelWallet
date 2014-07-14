@@ -1,5 +1,8 @@
+var $ = window.$ || {};
+var Divector = require('./divector.js');
+
 var controller = new Divector();
-controller.changeScene = function(newScene) {
+controller.onChangeScene = function(newSceneIndex) {
 
     // Queue current animating elements for cleanup
     var animatedElems = document.getElementsByClassName('rain');
@@ -8,9 +11,9 @@ controller.changeScene = function(newScene) {
     }
 
     // Switch to new animation if necessary
-    if (newScene === 0) {
+    if (newSceneIndex === 0) {
         randomCash();
-    } else if (newScene === 1) {
+    } else if (newSceneIndex === 1) {
         randomCards();
     }
 
@@ -43,69 +46,41 @@ var card6 = controller.addActor('#coin-card');
 var _window = 0;
 var _windowHeight = 0;
 var _windowWidth = 0;
+var PANEL_ASPECT_RATIO = 1.325;
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function(){
 
-    _window = $(window);
-    _windowHeight = _window.height();
-    _windowWidth = _window.width();
+    _windowHeight = window.innerHeight;
+    _windowWidth = window.innerWidth;
 
     // Initialize scene container height
-    $('.scene').each(function(idx, elem) {
-        elem.style.height = _windowHeight + 'px';
-    });
-
-    $('#photo-gallery').css({
-        height: 'auto',
-        float: 'left'
+    var scenes = document.getElementsByClassName('scene');
+    Array.prototype.forEach.call(scenes, function(el) {
+        el.style.height = _windowHeight + 'px';
     });
 
     var quarterScreen = _windowWidth / 4;
     var panelHeight = _windowHeight / 2.5;
-    var panelWidth = panelHeight * 1.325;
+    var panelWidth = panelHeight * PANEL_ASPECT_RATIO;
     var thirdLeft = panelHeight;
 
-    $('#panel, #rfid').css({
-        height: panelHeight,
-        width: panelWidth,
-        marginTop: -1 * (panelHeight / 2),
-        marginLeft: -1 * (panelWidth / 2)
+    var panelElem = document.getElementById('panel');
+    panelElem.style.height = panelHeight + 'px';
+    panelElem.style.width = panelWidth + 'px';
+    panelElem.style.marginTop = -1 * (panelHeight / 2) + 'px';
+    panelElem.style.marginLeft = -1 * (panelWidth / 2) + 'px';
+
+    var rfidContainer = document.getElementById('rfid-container');
+    rfidContainer.style.height = panelHeight + 'px';
+    rfidContainer.style.width = panelWidth + 'px';
+    rfidContainer.style.marginTop = -1 * (panelHeight / 2) + 'px';
+    rfidContainer.style.marginLeft = -1 * (panelWidth / 2) + 'px';
+
+    // Initialize profile image depths
+    var profiles = document.getElementsByClassName('profile');
+    Array.prototype.forEach.call(profiles, function(el) {
+        el.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)';
     });
-
-    $('#rfid-container').css({
-        height: panelWidth,
-        width: panelHeight,
-        marginTop: -1 * (panelWidth / 2),
-        marginLeft: -1 * (panelHeight / 4)
-    });
-
-    $('#jeans').css({
-        width: panelHeight * 3.25
-    });
-
-    $('#side-panel').css({
-        webkitTransform: 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)'
-    });
-
-    // $('.copy').css({
-    //     width: panelHeight * 1.4
-    // });
-
-    // $('.right').css({
-    //     left: '66%',
-    //     marginLeft: -1 * panelHeight * 0.7
-    // });
-
-    // $('.left').css({
-    //     left: '33%',
-    //     marginLeft: -1 * panelHeight * 0.7
-    // });
-
-    // $('.center').css({
-    //     left: '50%',
-    //     marginLeft: -1 * panelHeight * 0.7,
-    //     width: panelHeight * 1.4
-    // });
 
     document.addEventListener('webkitAnimationIteration', function(e) {
         var srcElement = e.srcElement;
@@ -131,7 +106,7 @@ $(function() {
             end: 1.0
         });
 
-    // Introduce product
+    // Zoom product
     controller.addScene()
         .addTransition(panel, {
             property: 'scale',

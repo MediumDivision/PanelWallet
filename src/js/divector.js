@@ -1,9 +1,8 @@
-window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+(function(console, requestAnimationFrame) {
 
 function Divector() {
 
-    this._window;
+    this._window = null;
     this._windowHeight = 0;
     this._scrollTop = 0;
     this._previousScrollTop = -1;
@@ -34,21 +33,21 @@ Divector.prototype.update = function() {
     var rawDifference, actor, transitions, transition, i, j, k;
 
     // Grab new scrollTop;
-    this._scrollTop = $('body').scrollTop();
+    this._scrollTop = window.scrollY;
 
     // If it is different we must recalculate
-    if (this._scrollTop != this._previousScrollTop) {
+    if (this._scrollTop !== this._previousScrollTop) {
         rawDifference = this._scrollTop / this._windowHeight;
         this._currentScene = rawDifference | 0; // Bitwise op in place of rounding (faster, I swear)
         this._sceneCompletion = rawDifference - this._currentScene;
         this._previousScrollTop = this._scrollTop;
 
-        if (this._currentScene != this._previousScene) {
+        if (this._currentScene !== this._previousScene) {
             // We are changing scenes.
 
             // Fire off the callback if we have one
-            if (typeof this.changeScene === 'function') {
-                this.changeScene(this._currentScene);
+            if (typeof this.onChangeScene === 'function') {
+                this.onChangeScene(this._currentScene);
             }
 
             // Spend a frame cleaning up and making sure everything is updated to expected positions.
@@ -65,7 +64,7 @@ Divector.prototype.update = function() {
                         for (k = 0; k < transitions.length; k++) {
                             transition = transitions[k];
 
-                            if (actor.properties[transition.property] != transition.endValue) {
+                            if (actor.properties[transition.property] !== transition.endValue) {
                                 actor.properties[transition.property] = transition.endValue;
                                 actor.dirty = true;
                                 if (this.renderQueue.indexOf(actor) < 0) {
@@ -89,7 +88,7 @@ Divector.prototype.update = function() {
                     if (transitions) {
                         for (j = 0; j < transitions.length; j++) {
                             transition = transitions[j];
-                            if (actor.properties[transition.property] != transition.beginValue) {
+                            if (actor.properties[transition.property] !== transition.beginValue) {
                                 actor.properties[transition.property] = transition.beginValue;
                                 actor.dirty = true;
                                 if (this.renderQueue.indexOf(actor) < 0) {
@@ -104,7 +103,7 @@ Divector.prototype.update = function() {
                     if (transitions) {
                         for (j = 0; j < transitions.length; j++) {
                             transition = transitions[j];
-                            if (actor.properties[transition.property] != transition.endValue) {
+                            if (actor.properties[transition.property] !== transition.endValue) {
                                 actor.properties[transition.property] = transition.endValue;
                                 actor.dirty = true;
                                 if (this.renderQueue.indexOf(actor) < 0) {
@@ -135,7 +134,7 @@ Divector.prototype.update = function() {
                             progress = (transition.endValue - transition.beginValue) * ((this._sceneCompletion - transition.begin) / (transition.end - transition.begin));
                         }
 
-                        if (actor.properties[transition.property] != transition.beginValue + progress) {
+                        if (actor.properties[transition.property] !== transition.beginValue + progress) {
                             actor.properties[transition.property] = transition.beginValue + progress;
                             actor.dirty = true;
                             this.renderQueue.push(actor);
@@ -185,7 +184,7 @@ Divector.prototype.initialize = function() {
         this.actors[i].initialize();
     }
 
-}
+};
 
 function Scene(controller) {
 
@@ -194,11 +193,12 @@ function Scene(controller) {
 }
 
 Scene.prototype.addTransition = function(actor, options) {
-    var actor = isNaN(actor) ? actor : this.controller.actors[actor];
+    // Get a reference by either ID or passing the actor object itself
+    actor = isNaN(actor) ? actor : this.controller.actors[actor];
     actor.addTransition(this.id, options);
 
     return this; // For chaining!
-}
+};
 
 function Actor(el) {
 
@@ -245,7 +245,7 @@ Actor.prototype.addTransition = function(sceneId, options) {
 
     this.transitions[sceneId].push(options);
 
-}
+};
 
 Actor.prototype.initialize = function() {
 
@@ -254,7 +254,7 @@ Actor.prototype.initialize = function() {
         this.initializeProperties();
     }
 
-}
+};
 
 Actor.prototype.initializeProperties = function() {
     var transform, scaleX, skewX, skewY, scaleY, translateX, translateY, opacity;
@@ -277,12 +277,12 @@ Actor.prototype.initializeProperties = function() {
         opacity: opacity ? opacity : 1
     };
 
-}
+};
 
 Actor.prototype.getTransform = function() {
 
     var style = window.getComputedStyle(this.$el, null);
-    transform = style.getPropertyValue("-webkit-transform") ||
+    var transform = style.getPropertyValue("-webkit-transform") ||
         style.getPropertyValue("-moz-transform") ||
         style.getPropertyValue("-ms-transform") ||
         style.getPropertyValue("-o-transform") ||
@@ -294,6 +294,7 @@ Actor.prototype.getTransform = function() {
     }
 
     if (transform) {
+        console.log("TRANSFORM", transform);
         var matrix = parseMatrix(transform),
             rotateY = Math.asin(-matrix.m13),
             rotateX,
@@ -398,3 +399,7 @@ function parseMatrix(matrixString) {
     }
     return matrix;
 }
+
+module.exports = Divector;
+
+})(window.console, window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame);
