@@ -1,19 +1,222 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Panel Wallet - Coming Summer 2014</title>
-    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <title>Panel Wallet</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="//use.typekit.net/eyq8qst.js"></script>
+    <script type="text/javascript">
+    try {
+        Typekit.load();
+    } catch (e) {}
+    </script>
 </head>
+
 <body>
 
-    <div id="logo">
-        <img src="assets/images/panel-logo.png" />
+    <div id="header">
+        <img src="assets/images/panel-logo.svg" style="float: left" />
+        <img src="assets/images/kickstarter-badge-funded.png" style="float: right" />
     </div>
 
-    <div id="tagline">
-        Coming Summer 2014
+    <div id="rfid-container">
+
+        <div id="rfid1">
+            <img src="assets/images/rfid1.svg" height="100%" />
+        </div>
+
+        <div id="rfid2">
+            <img src="assets/images/rfid2.svg" height="100%" />
+        </div>
+
+        <div id="rfid3">
+            <img src="assets/images/rfid3.svg" height="100%" />
+        </div>
+
+    </div>
+
+    <div id="jeans">
+        <img src="assets/images/jeans.svg" width="100%" />
+    </div>
+
+    <div id="panel">
+
+        <div class="profile" id="band-profile">
+            <img src="assets/images/panel-profile-band.svg" height="100%" />
+        </div>
+        <div class="profile" id="cards-profile">
+            <img src="assets/images/panel-profile-cards.svg" height="100%" />
+        </div>
+        <div class="profile" id="cash-profile">
+            <img src="assets/images/panel-profile-cash.svg" height="100%" />
+        </div>
+        <div class="profile" id="panel-profile">
+            <img src="assets/images/panel-profile-panel.svg" height="100%" />
+        </div>
+
+        <div id="back-panel" class='panel'>
+            <img src="assets/images/panel.svg" width="100%" height="100%" />
+        </div>
+
+        <div id="front-panel" class='panel'>
+            <img src="assets/images/panel.svg" width="100%" height="100%" />
+        </div>
+
+        <div id="cash1" class="cash">
+            <img id="cashImg1" src="assets/images/cash-front-right.svg" height="100%" width="100%" />
+        </div>
+        <div id="cash2" class="cash">
+            <img id="cashImg2" src="assets/images/cash-front-right.svg" height="100%" width="100%" />
+        </div>
+        <div id="cash3" class="cash">
+            <img id="cashImg3" src="assets/images/cash-front-right.svg" height="100%" width="100%" />
+        </div>
+        <div id="cash4" class="cash">
+            <img id="cashImg4" src="assets/images/cash-front-right.svg" height="100%" width="100%" />
+        </div>
+        <div id="cash5" class="cash">
+            <img id="cashImg5" src="assets/images/cash-front-right.svg" height="100%" width="100%" />
+        </div>
+        <div id="credit-card" class="card">
+            <img src="assets/images/credit-card.svg" height="100%" width="100%" />
+        </div>
+        <div id="bank-card" class="card">
+            <img src="assets/images/bank-card.svg" height="100%" width="100%" />
+        </div>
+        <div id="transit-card" class="card">
+            <img src="assets/images/transit-card.svg" height="100%" width="100%" />
+        </div>
+        <div id="insurance-card" class="card">
+            <img src="assets/images/insurance-card.svg" height="100%" width="100%" />
+        </div>
+        <div id="drivers-license-card" class="card">
+            <img src="assets/images/drivers-license-card.svg" height="100%" width="100%" />
+        </div>
+        <div id="coin-card" class="card">
+            <img src="assets/images/coin-card.svg" height="100%" width="100%" />
+        </div>
+
+        <div id="back-band" class='band'>
+            <img src="assets/images/band-with-logo.svg" width="100%" />
+        </div>
+
+        <div id="front-band" class='band'>
+            <img src="assets/images/band-with-logo.svg" width="100%" />
+        </div>
+
+    </div>
+
+    <div id="animation-container">
+    </div>
+
+    <div id="video-header" class="scene">
+        <iframe src="//player.vimeo.com/video/99803662?byline=0&amp;portrait=0&amp;color=ffffff" width="650" height="410" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+
+    <div id="make-it-rain" class="scene">
+        <div class="copy center">
+            <div class="title">
+                Your cash.
+            </div>
+        </div>
+    </div>
+
+    <div id="make-it-rain-harder" class="scene">
+        <div class="copy center">
+            <div class="title">
+                Your cards.
+            </div>
+        </div>
+    </div>
+
+    <div id="title-card" class="scene">
+        <div class="copy center">
+            <div class="title">
+                Simply considered.
+            </div>
+        </div>
+    </div>
+
+    <div id="zoom-in" class="scene"></div>
+    <div id="rotate-and-push" class="scene"></div>
+
+    <div id="cash-scene" class="scene">
+        <div class="copy right">
+            <div class="title">
+                Why tri-fold?
+            </div>
+            <div class="body">
+                A minimalist wallet for crisp, bi-folded bills. Cash is king!
+            </div>
+        </div>
+    </div>
+
+    <div id="scene7" class="scene"></div>
+    <div id="scene8" class="scene"></div>
+
+    <div id="card-scene" class="scene">
+        <div class="copy left body">
+            More when you need it, less when you don't. Panel let's you decide how many cards you carry.
+        </div>
+    </div>
+
+    <div id="scene9" class="scene"></div>
+    <div id="scene10" class="scene"></div>
+
+    <div id="scene5" class="scene">
+        <div class="copy center body">
+            Your safety is at the core of Panel.
+            <br>Protect against Wireless ID Theft by facing the cash side away from your body.
+        </div>
+    </div>
+
+    <div id="scene11" class="scene"></div>
+    <div id="scene12" class="scene"></div>
+    <div id="scene13" class="scene">
+        <div class="copy left body">
+            Band security. No matter how you rock your Panel, the band's traction keeps a firm grasp on your essentials and deters pick-pocket theft.
+        </div>
+    </div>
+
+    <div id="photo-gallery" class="scene">
+
+        <div class="copy">
+            Be first to set your pockets free!
+        </div>
+
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-1.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-2.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-3.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-4.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-5.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-6.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-7.jpg" />
+        </div>
+        <div class='product-photo'>
+            <img src="assets/images/product-photo-8.jpg" />
+        </div>
+
+        <div class="footer">
+
+        </div>
+
     </div>
 
 </body>
+
 </html>

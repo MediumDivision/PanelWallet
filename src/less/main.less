@@ -1,0 +1,338 @@
+@import (inline) "../css/normalize.css";
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+body {
+    background-color: #FFFFFF;
+    color: #2F2F2F;
+    font-size: 2em;
+    overflow-x: hidden;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 3em;
+    line-height: 3em;
+}
+
+#header img {
+    height: 100%;
+    width: auto;
+    margin: 1em;
+}
+
+#video-header {
+    background-color: #efefef;
+    background-image: url('../assets/images/cardboard_flat.png');
+    background-position: top left;
+    border-bottom: 10px solid #efefef;
+}
+
+#photo-gallery {
+    background-image: url('../assets/images/cartographer.png');
+    background-position: top left;
+    border-top: 10px solid #3f3f3f;
+    float: left;
+    height: auto;
+}
+
+#photo-gallery div {
+    float: left;
+    width: 20%;
+    margin-left: 4%;
+    margin-top: 4%;
+}
+
+#photo-gallery img {
+    width: 100%;
+    height: 100%;
+}
+
+#photo-gallery .footer {
+    width: 100%;
+    height: 3em;
+}
+
+@-webkit-keyframes slideup {
+  from {
+    -webkit-transform: translateY(0);
+  }
+
+  to {
+    -webkit-transform: translateY(-55em);
+  }
+}
+
+.rain {
+    -webkit-animation-name: slideup;
+    -moz-animation-name:    slideup;
+    -o-animation-name:      slideup;
+    animation-name:         slideup;
+
+    -webkit-animation-duration: 5s;
+    -moz-animation-duration:    5s;
+    -o-animation-duration:      5s;
+    animation-duration:         5s;
+
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    animation-timing-function: linear;
+
+    position: absolute;
+    top: 125%;
+    left: 50%;
+    width: 30%;
+    height: 20%;
+}
+
+#video-header iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -330px;
+    margin-top: -210px;
+    border: 10px solid white;
+}
+
+#animation-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+#panel {
+    position: fixed;
+    margin: 0 auto;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: scale(0.5) translateY(2000px) translateZ(0px);
+}
+
+#panel div {
+    position: absolute;
+}
+
+/* TODO: This already looks pretty cool, but it definitely needs to be perfected */
+.profile {
+    height: 135%;
+    width: 11.7%;
+    left: 50%;
+    margin-left: -5.85%;
+    margin-top: -13.25%;
+    -webkit-backface-visibility: hidden;
+}
+
+#side-panel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#panel .panel {
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+}
+
+#back-panel {
+    -webkit-transform: rotateY(180deg);
+}
+
+#panel .band {
+    width: 100%;
+    top: 50%;
+    margin-top: -7%;
+    -webkit-transform: translateZ(10px);
+}
+
+#panel #back-band {
+    -webkit-transform: rotateY(180deg) translateZ(2px);
+}
+
+.cash {
+    height: 96%;
+    width: 94%;
+    top: 2%;
+    left: 5%;
+    -webkit-transform: translateX(-5000px) translateZ(5px); /* Arbitrary, just move them off the screen */
+    -webkit-backface-visibility: hidden;
+}
+
+.card {
+    height: 79%;
+    width: 96%;
+    top: 10.5%;
+    left: 2%;
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(1px);
+}
+
+.card img {
+    -webkit-transform: rotateZ(180deg);
+}
+
+#cashImg1 {
+    -webkit-transform: rotate(12deg);
+}
+#cashImg2 {
+    -webkit-transform: rotate(6deg);
+}
+#cashImg3 {
+    -webkit-transform: rotate(1deg);
+}
+#cashImg4 {
+    -webkit-transform: rotate(-7deg);
+}
+#cashImg5 {
+    -webkit-transform: rotate(-11deg);
+}
+
+.copy {
+    background-color: rgba(245, 245, 245, 0.8);
+    text-shadow: 0px 0px 1em #FFFFFF;
+    padding: 1em;
+    margin: 3em 0;
+    position: absolute;
+    border-radius: 0.2em;
+    text-align: center;
+}
+
+.body {
+    font-weight: 100;
+    font-size: 1em;
+}
+
+.title {
+    width: 100%;
+    font-size: 2em;
+    font-weight: 500;
+}
+
+#make-it-rain .copy, #make-it-rain-harder .copy {
+    top: 33%;
+    margin-top: -1em;
+}
+
+#make-it-rain .copy, #make-it-rain-harder .copy, #title-card .copy {
+    background-color: transparent;
+}
+
+#photo-gallery .copy {
+    width: 100%;
+    background-color: transparent;
+    color: #FFF;
+    float: left;
+    clear: both;
+    position: relative;
+    margin: 0;
+    text-shadow: none;
+    font-size: 1.5em;
+    font-weight: 100;
+}
+
+.center {
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+}
+
+.right {
+    width: 50%;
+    right: 0;
+    text-align: left;
+    border-radius: 0.2em 0 0 0.2em;
+}
+
+.right div {
+    margin-right: 1em;
+}
+
+.left {
+    width: 50%;
+    left: 0;
+    text-align: right;
+    padding-left: 1em;
+    border-radius: 0 0.2em 0.2em 0;
+}
+
+#tagline {
+    position: fixed;
+    top: 100%;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+}
+
+#rfid-container {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+#rfid-container div {
+    position: absolute;
+}
+
+#rfid1 {
+    height: 16%;
+    width: 10%;
+    right: 0;
+    top: 50%;
+    margin-top: -12%;
+    opacity: 0;
+}
+
+#rfid2 {
+    height: 40%;
+    width: 17%;
+    left: 50%;
+    top: 50%;
+    margin-left: -5%;
+    margin-top: -28%;
+    opacity: 0;
+}
+
+#rfid3 {
+    height: 100%;
+    width: 25.4%;
+    left: 0;
+    opacity: 0;
+}
+
+#jeans {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    height: 50%;
+    border: 1px solid red;
+    -webkit-transform: translateZ(0px);
+    display: none;
+}
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*border: 1px solid red;*/
+}
+
+.actor {
+    -webkit-transform-origin: center;
+    -webkit-transform-style: preserve-3d;
+}
