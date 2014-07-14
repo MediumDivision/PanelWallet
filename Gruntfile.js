@@ -149,7 +149,7 @@ module.exports = function(grunt) {
         watch: {
             styles: {
                 files: ['src/less/*.less', 'src/js/*.js', 'src/*.html'],
-                tasks: ['develop']
+                tasks: ['build']
             }
         }
 
@@ -164,6 +164,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('build', ['jshint', 'clean:development', 'less:development', 'browserify:development', 'copy:development', 'replace:development']);
-    grunt.registerTask('release', ['jshint', 'clean:release', 'less:release', 'uglify:release', 'copy:release']);
+    grunt.registerTask('build', ['jshint', 'less:development', 'browserify:development', 'copy:development', 'replace:development']);
+    grunt.registerTask('release', ['jshint', 'less:release', 'uglify:release', 'copy:release']);
 };
