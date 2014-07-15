@@ -3,10 +3,10 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="29.332px" height="256.5px" viewBox="0 0 29.332 256.5" enable-background="new 0 0 29.332 256.5" xml:space="preserve">
-<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M20.8,16.857v221.311
-	c0,0.814,0.66,1.475,1.476,1.475c0.814,0,1.476-0.66,1.476-1.475V16.857"/>
-<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M19.439,16.784v221.309
-	c0,1.563,1.271,2.835,2.836,2.835c1.562,0,2.834-1.271,2.834-2.835V16.784"/>
-<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M22.389,16.784v221.309
-	c0,0.126-0.227,0.126-0.227,0V16.784"/>
+<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M20.8,22.818v209.314
+	c0,0.769,0.66,1.392,1.476,1.392c0.814,0,1.477-0.623,1.477-1.392V22.818"/>
+<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M19.439,22.75v209.31
+	c0,1.478,1.271,2.682,2.836,2.682c1.562,0,2.834-1.203,2.834-2.682V22.75"/>
+<path fill="none" stroke="#437C53" stroke-width="0.907" stroke-miterlimit="10" d="M22.389,22.75v209.31
+	c0,0.118-0.227,0.118-0.227,0V22.75"/>
 </svg>

@@ -7,7 +7,11 @@ controller.onChangeScene = function(newSceneIndex) {
     // Queue current animating elements for cleanup
     var animatedElems = document.getElementsByClassName('rain');
     for (var i = 0; i < animatedElems.length; i++) {
-        animatedElems[i].className += ' destroy';
+        if (newSceneIndex > 2) {
+            document.getElementById('animation-container').removeChild(animatedElems[i]);
+        } else {
+            animatedElems[i].className += ' destroy';
+        }
     }
 
     // Switch to new animation if necessary
@@ -21,21 +25,28 @@ controller.onChangeScene = function(newSceneIndex) {
 
 var panel = controller.addActor('#panel');
 var jeans = controller.addActor('#jeans');
+var animationContainer = controller.addActor('#animation-container');
 
 var rfid1 = controller.addActor('#rfid1');
 var rfid2 = controller.addActor('#rfid2');
 var rfid3 = controller.addActor('#rfid3');
 
 var cash1 = controller.addActor('#cash1');
-var cashImage1 = controller.addActor('#cashImg1');
+var cashImageRight1 = controller.addActor('#cashImgRight1');
+var cashImageLeft1 = controller.addActor('#cashImgLeft1');
 var cash2 = controller.addActor('#cash2');
-var cashImage2 = controller.addActor('#cashImg2');
+var cashImageRight2 = controller.addActor('#cashImgRight2');
+var cashImageLeft2 = controller.addActor('#cashImgLeft2');
 var cash3 = controller.addActor('#cash3');
-var cashImage3 = controller.addActor('#cashImg3');
+var cashImageRight3 = controller.addActor('#cashImgRight3');
+var cashImageLeft3 = controller.addActor('#cashImgLeft3');
 var cash4 = controller.addActor('#cash4');
-var cashImage4 = controller.addActor('#cashImg4');
+var cashImageRight4 = controller.addActor('#cashImgRight4');
+var cashImageLeft4 = controller.addActor('#cashImgLeft4');
 var cash5 = controller.addActor('#cash5');
-var cashImage5 = controller.addActor('#cashImg5');
+var cashImageRight5 = controller.addActor('#cashImgRight5');
+var cashImageLeft5 = controller.addActor('#cashImgLeft5');
+
 var card1 = controller.addActor('#coin-card');
 var card2 = controller.addActor('#credit-card');
 var card3 = controller.addActor('#bank-card');
@@ -48,7 +59,7 @@ var _windowHeight = 0;
 var _windowWidth = 0;
 var PANEL_ASPECT_RATIO = 1.325;
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
 
     _windowHeight = window.innerHeight;
     _windowWidth = window.innerWidth;
@@ -104,6 +115,13 @@ document.addEventListener('DOMContentLoaded', function(){
             endValue: 0,
             begin: 0,
             end: 1.0
+        })
+        .addTransition(animationContainer, {
+            property: 'opacity',
+            beginValue: 1,
+            endValue: 0,
+            begin: 0,
+            end: 0.75
         });
 
     // Zoom product
@@ -173,14 +191,14 @@ document.addEventListener('DOMContentLoaded', function(){
         .addTransition(cash1, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.5,
+            endValue: panelHeight * 1.3,
             begin: 0,
             end: 0
         })
         .addTransition(cash2, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.5,
+            endValue: panelHeight * 1.4,
             begin: 0,
             end: 0
         })
@@ -194,89 +212,127 @@ document.addEventListener('DOMContentLoaded', function(){
         .addTransition(cash4, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.5,
+            endValue: panelHeight * 1.6,
             begin: 0,
             end: 0
         })
         .addTransition(cash5, {
             property: 'translateY',
             beginValue: 0,
-            endValue: panelHeight * 1.5,
+            endValue: panelHeight * 1.7,
             begin: 0,
             end: 0
         });
 
-    // rotate into neat stack, then slide under band.
+    // stack, then fold in half
     controller.addScene()
-        .addTransition(cashImage1, {
-            property: 'rotateZ',
-            beginValue: 12,
-            endValue: 0,
+        .addTransition(cash1, {
+            property: 'translateY',
+            beginValue: panelHeight * 1.3,
+            endValue: panelHeight * 1.5,
             begin: 0,
-            end: 0.25
+            end: 0.5
         })
-        .addTransition(cashImage2, {
-            property: 'rotateZ',
-            beginValue: 6,
-            endValue: 0,
+        .addTransition(cash2, {
+            property: 'translateY',
+            beginValue: panelHeight * 1.4,
+            endValue: panelHeight * 1.5,
             begin: 0,
-            end: 0.25
+            end: 0.5
         })
-        .addTransition(cashImage3, {
-            property: 'rotateZ',
-            beginValue: 1,
-            endValue: 0,
+        .addTransition(cash3, {
+            property: 'translateY',
+            beginValue: panelHeight * 1.5,
+            endValue: panelHeight * 1.5,
             begin: 0,
-            end: 0.25
+            end: 0.5
         })
-        .addTransition(cashImage4, {
-            property: 'rotateZ',
-            beginValue: -7,
-            endValue: 0,
+        .addTransition(cash4, {
+            property: 'translateY',
+            beginValue: panelHeight * 1.6,
+            endValue: panelHeight * 1.5,
             begin: 0,
-            end: 0.25
+            end: 0.5
         })
-        .addTransition(cashImage5, {
-            property: 'rotateZ',
-            beginValue: -11,
-            endValue: 0,
+        .addTransition(cash5, {
+            property: 'translateY',
+            beginValue: panelHeight * 1.7,
+            endValue: panelHeight * 1.5,
             begin: 0,
-            end: 0.25
+            end: 0.5
         })
+        .addTransition(cashImageLeft1, {
+            property: 'rotateY',
+            beginValue: 0,
+            endValue: -180,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(cashImageLeft2, {
+            property: 'rotateY',
+            beginValue: 0,
+            endValue: -180,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(cashImageLeft3, {
+            property: 'rotateY',
+            beginValue: 0,
+            endValue: -180,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(cashImageLeft4, {
+            property: 'rotateY',
+            beginValue: 0,
+            endValue: -180,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(cashImageLeft5, {
+            property: 'rotateY',
+            beginValue: 0,
+            endValue: -180,
+            begin: 0.5,
+            end: 1
+        });
+
+    // Slide under band
+    controller.addScene()
         .addTransition(cash1, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
             endValue: 0,
-            begin: 0.5,
-            end: 1.0
+            begin: 0,
+            end: 1
         })
         .addTransition(cash2, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
             endValue: 0,
-            begin: 0.5,
-            end: 1.0
+            begin: 0,
+            end: 1
         })
         .addTransition(cash3, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
             endValue: 0,
-            begin: 0.5,
-            end: 1.0
+            begin: 0,
+            end: 1
         })
         .addTransition(cash4, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
             endValue: 0,
-            begin: 0.5,
-            end: 1.0
+            begin: 0,
+            end: 1
         })
         .addTransition(cash5, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
             endValue: 0,
-            begin: 0.5,
-            end: 1.0
+            begin: 0,
+            end: 1
         });
 
     // flip entire panel to other side, hide 'crisp', reveal 'flexible'

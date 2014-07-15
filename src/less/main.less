@@ -168,11 +168,24 @@ body {
 
 .cash {
     height: 96%;
-    width: 94%;
+    width: 169%;
     top: 2%;
-    left: 5%;
+    left: -77%;
     -webkit-transform: translateX(-5000px) translateZ(5px); /* Arbitrary, just move them off the screen */
     -webkit-backface-visibility: hidden;
+}
+
+.cashImgRight {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.cashImgLeft {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    -webkit-transform-origin: center right;
 }
 
 .card {
@@ -229,22 +242,6 @@ body {
 
 #cash5 {
     -webkit-transform: translateX(-5000px) translateZ(5px);
-}
-
-#cashImg1 {
-    -webkit-transform: rotate(12deg);
-}
-#cashImg2 {
-    -webkit-transform: rotate(6deg);
-}
-#cashImg3 {
-    -webkit-transform: rotate(1deg);
-}
-#cashImg4 {
-    -webkit-transform: rotate(-7deg);
-}
-#cashImg5 {
-    -webkit-transform: rotate(-11deg);
 }
 
 .copy {
@@ -382,4 +379,9 @@ body {
 .actor {
     -webkit-transform-origin: center;
     -webkit-transform-style: preserve-3d;
+}
+
+.cashImgLeft {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-origin: center right;
 }
