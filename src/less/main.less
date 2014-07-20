@@ -36,11 +36,12 @@ body {
 }
 
 #photo-gallery {
-    background-image: url('assets/images/cartographer.png');
+    background-image: url('assets/images/asfalt.png');
     background-position: top left;
     border-top: 10px solid #3f3f3f;
     float: left;
     height: auto;
+    -webkit-transform: translateZ(600px);
 }
 
 #photo-gallery div {
@@ -72,7 +73,7 @@ body {
 }
 
 .rain {
-    -webkit-animation-name: slideup;
+/*    -webkit-animation-name: slideup;
     -moz-animation-name:    slideup;
     -o-animation-name:      slideup;
     animation-name:         slideup;
@@ -89,13 +90,16 @@ body {
 
     -webkit-animation-timing-function: linear;
     -moz-animation-timing-function: linear;
-    animation-timing-function: linear;
+    animation-timing-function: linear;*/
 
     position: absolute;
-    top: 125%;
-    left: 50%;
     width: 30%;
     height: 20%;
+    -webkit-transform-origin: center;
+}
+
+.rain img {
+    -webkit-transform-origin: center;
 }
 
 #video-header iframe {
@@ -107,13 +111,24 @@ body {
     border: 10px solid white;
 }
 
-#animation-container {
-    position: fixed;
+#cash-container {
+    position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    -webkit-transform: translateZ(-50px);
+    -webkit-transform: translateZ(-900px);
+    opacity: 1;
+}
+
+#card-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateZ(-800px);
+    opacity: 1;
 }
 
 #panel {
@@ -201,27 +216,27 @@ body {
 }
 
 #coin-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(1px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-1px);
 }
 
 #credit-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(2px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-2px);
 }
 
 #bank-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(3px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-3px);
 }
 
 #transit-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(4px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-4px);
 }
 
 #insurance-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(5px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-5px);
 }
 
 #drivers-license-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(6px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-6px);
 }
 
 #cash1 {
@@ -360,12 +375,20 @@ body {
 
 #jeans {
     position: fixed;
-    top: 35%;
+    bottom: 0;
     left: 50%;
-    height: 50%;
-    border: 1px solid red;
-    -webkit-transform: translateZ(0px);
-    display: none;
+    width: 50%;
+    opacity: 0;
+    -webkit-transform: translateZ(-500px);
+}
+
+#jeans-pocket {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    opacity: 0;
+    -webkit-transform: translateZ(500px);
 }
 
 .scene {

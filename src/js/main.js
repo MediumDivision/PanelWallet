@@ -5,27 +5,29 @@ var controller = new Divector();
 controller.onChangeScene = function(newSceneIndex) {
 
     // Queue current animating elements for cleanup
-    var animatedElems = document.getElementsByClassName('rain');
-    for (var i = 0; i < animatedElems.length; i++) {
-        if (newSceneIndex > 2) {
-            document.getElementById('animation-container').removeChild(animatedElems[i]);
-        } else {
-            animatedElems[i].className += ' destroy';
-        }
-    }
+    // var animatedElems = document.getElementsByClassName('rain');
+    // for (var i = 0; i < animatedElems.length; i++) {
+    //     if (newSceneIndex > 2) {
+    //         document.getElementById('animation-container').removeChild(animatedElems[i]);
+    //     } else {
+    //         animatedElems[i].className += ' destroy';
+    //     }
+    // }
 
-    // Switch to new animation if necessary
-    if (newSceneIndex === 0) {
-        randomCash();
-    } else if (newSceneIndex === 1) {
-        randomCards();
-    }
+    // // Switch to new animation if necessary
+    // if (newSceneIndex === 0) {
+    //     randomCash();
+    // } else if (newSceneIndex === 1) {
+    //     randomCards();
+    // }
 
 };
 
 var panel = controller.addActor('#panel');
 var jeans = controller.addActor('#jeans');
-var animationContainer = controller.addActor('#animation-container');
+var jeansPocket = controller.addActor('#jeans-pocket');
+var cashContainer = controller.addActor('#cash-container');
+var cardContainer = controller.addActor('#card-container');
 
 var rfid1 = controller.addActor('#rfid1');
 var rfid2 = controller.addActor('#rfid2');
@@ -68,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var scenes = document.getElementsByClassName('scene');
     Array.prototype.forEach.call(scenes, function(el) {
         el.style.height = _windowHeight + 'px';
+        el.style.width = _windowWidth + 'px';
+        el.style.maxWidth = _windowWidth + 'px';
     });
 
     var quarterScreen = _windowWidth / 4;
@@ -87,6 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
     rfidContainer.style.marginTop = -1 * (panelHeight / 2) + 'px';
     rfidContainer.style.marginLeft = -1 * (panelWidth / 2) + 'px';
 
+    // Initialize jean dimensions
+    var jeanEls = document.getElementsByClassName('jeans');
+    var jeanWidth = panelHeight * 2.25;
+    Array.prototype.forEach.call(jeanEls, function(el) {
+        el.style.minWidth = jeanWidth + 'px';
+        el.style.height = jeanWidth * 0.75 + 'px';
+    });
+
     // Initialize profile image depths
     var profiles = document.getElementsByClassName('profile');
     Array.prototype.forEach.call(profiles, function(el) {
@@ -100,6 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('animation-container').removeChild(srcElement);
         }
     });
+
+    randomCash();
+    randomCards();
 
     // Cash rain
     controller.addScene();
@@ -115,13 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
             endValue: 0,
             begin: 0,
             end: 1.0
-        })
-        .addTransition(animationContainer, {
-            property: 'opacity',
-            beginValue: 1,
-            endValue: 0,
-            begin: 0,
-            end: 0.75
         });
 
     // Zoom product
@@ -563,14 +571,49 @@ document.addEventListener('DOMContentLoaded', function() {
             end: 1
         });
 
-    // Rotate panel back to cash-side. Fade in jeans.
+    // Rotate panel back to cash-side. Scale panel. Fade in jeans.
     controller.addScene()
         .addTransition(panel, {
             property: 'rotateY',
             beginValue: 90,
             endValue: 0,
             begin: 0,
+            end: 0.5
+        })
+        .addTransition(panel, {
+            property: 'scale',
+            beginValue: 1,
+            endValue: 0.62,
+            begin: 0.5,
             end: 1
+        })
+        .addTransition(jeans, {
+            property: 'translateY',
+            beginValue: _windowHeight,
+            endValue: _windowHeight / 2,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(jeansPocket, {
+            property: 'translateY',
+            beginValue: _windowHeight,
+            endValue: _windowHeight / 2,
+            begin: 0.5,
+            end: 1
+        })
+        .addTransition(jeansPocket, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(jeans, {
+            property: 'opacity',
+            beginValue: 0,
+            endValue: 1,
+            begin: 0,
+            end: 0
         });
 
     // Rotate panel into jean pocket.
@@ -581,6 +624,38 @@ document.addEventListener('DOMContentLoaded', function() {
             endValue: 90,
             begin: 0,
             end: 1
+        })
+        .addTransition(jeans, {
+            property: 'translateY',
+            beginValue: _windowHeight / 2,
+            endValue: 0,
+            begin: 0,
+            end: 0.5
+        })
+        .addTransition(jeansPocket, {
+            property: 'translateY',
+            beginValue: _windowHeight / 2,
+            endValue: 0,
+            begin: 0,
+            end: 0.5
+        });
+
+
+    // Slide panel into pocket, and we're done!
+    controller.addScene()
+        .addTransition(jeans, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: -1 * _windowHeight,
+            begin: 0,
+            end: 1
+        })
+        .addTransition(jeansPocket, {
+            property: 'translateY',
+            beginValue: 0,
+            endValue: -1 * _windowHeight,
+            begin: 0,
+            end: 1
         });
 
     controller.initialize();
@@ -589,7 +664,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function randomCash() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
         var srcSelector = Math.round(Math.random());
         var src = 'assets/images/cash-front.svg';
         if (srcSelector) {
@@ -598,24 +673,29 @@ function randomCash() {
 
         var div = document.createElement('div');
         div.className = 'rain';
-        div.style.left = (Math.random() * (_windowWidth - (-100)) + (-100)) + 'px';
-        div.style.webkitAnimationDelay = Math.random() * 5 + 's';
-        div.style.webkitAnimationIterationCount = 'infinite';
+
+        var top = Math.random() * _windowHeight;
+        var left = Math.random() * _windowWidth - 250;
+        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
-        img.style.webkitTransform = 'scale(' + (Math.random() * (1 - 0.33) + 0.33) + ') rotate(' + Math.random() * 180 + 'deg)';
+
+        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
+        var blurRadius = (1 - randomScale) * 4;
+        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg) translateZ(' + randomScale + 'px)';
+        img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
-        document.getElementById('animation-container').appendChild(div);
+        document.getElementById('cash-container').appendChild(div);
     }
 }
 
 function randomCards() {
-    for (var i = 0; i < 10; i++) {
-        var srcSelector = Math.round(Math.random() * 4);
+    for (var i = 0; i < 20; i++) {
+        var srcSelector = Math.round(Math.random() * 5);
         var src = 'assets/images/credit-card.svg';
         switch (srcSelector) {
             case 1:
@@ -630,21 +710,33 @@ function randomCards() {
             case 4:
                 src = 'assets/images/drivers-license-card.svg';
                 break;
+            case 5:
+                src = 'assets/images/cash-front.svg';
+                break;
         }
+
+        var topSeed = Math.random();
+        var top = topSeed * _windowHeight;
+        var maxWidth = (1 - topSeed) * _windowWidth;
+        var halfMaxWidth = maxWidth * 0.5;
+        var left = (_windowWidth * 0.5) + (Math.random() * (halfMaxWidth - (-1 * halfMaxWidth)) + (-1 * halfMaxWidth)) - 250;
 
         var div = document.createElement('div');
         div.className = 'rain';
-        div.style.left = (Math.random() * (_windowWidth - (-100)) + (-100)) + 'px';
-        div.style.webkitAnimationDelay = Math.random() * 5 + 's';
-        div.style.webkitAnimationIterationCount = 'infinite';
+
+        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
-        img.style.webkitTransform = 'scale(' + (Math.random() * (1 - 0.33) + 0.33) + ') rotate(' + Math.random() * 180 + 'deg)';
+
+        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
+        var blurRadius = (1 - randomScale) * 3;
+        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg) translateZ(' + randomScale + 'px)';
+        img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
-        document.getElementById('animation-container').appendChild(div);
+        document.getElementById('card-container').appendChild(div);
     }
 }

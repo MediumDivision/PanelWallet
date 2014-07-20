@@ -316,7 +316,7 @@ Actor.prototype.getTransform = function() {
             translate: {
                 x: matrix.m41,
                 y: matrix.m42,
-                z: Math.abs(matrix.m43)
+                z: matrix.m43
             },
             scale: Math.abs(matrix.m11)
         };
