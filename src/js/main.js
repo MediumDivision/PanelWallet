@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     rfidContainer.style.height = panelHeight + 'px';
     rfidContainer.style.width = panelWidth + 'px';
     rfidContainer.style.marginTop = -1 * (panelHeight / 2) + 'px';
-    rfidContainer.style.marginLeft = -1 * (panelWidth / 2) + 'px';
+    rfidContainer.style.marginLeft = -1 * (panelWidth / 4) + 'px';
 
     // Initialize jean dimensions
     var jeanEls = document.getElementsByClassName('jeans');
@@ -307,43 +307,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Slide under band
     controller.addScene()
+        .addTransition(cashImageRight1, {
+            property: 'rotateZ',
+            beginValue: 0,
+            endValue: 30,
+            begin: 0,
+            end: 0.25
+        })
+        .addTransition(cashImageRight2, {
+            property: 'rotateZ',
+            beginValue: 0,
+            endValue: 30,
+            begin: 0,
+            end: 0.25
+        })
+        .addTransition(cashImageRight3, {
+            property: 'rotateZ',
+            beginValue: 0,
+            endValue: 30,
+            begin: 0,
+            end: 0.25
+        })
+        .addTransition(cashImageRight4, {
+            property: 'rotateZ',
+            beginValue: 0,
+            endValue: 30,
+            begin: 0,
+            end: 0.25
+        })
+        .addTransition(cashImageRight5, {
+            property: 'rotateZ',
+            beginValue: 0,
+            endValue: 30,
+            begin: 0,
+            end: 0.25
+        })
         .addTransition(cash1, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
-            endValue: 0,
+            endValue: panelHeight * 0.33,
             begin: 0,
             end: 1
         })
         .addTransition(cash2, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
-            endValue: 0,
+            endValue: panelHeight * 0.33,
             begin: 0,
             end: 1
         })
         .addTransition(cash3, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
-            endValue: 0,
+            endValue: panelHeight * 0.33,
             begin: 0,
             end: 1
         })
         .addTransition(cash4, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
-            endValue: 0,
+            endValue: panelHeight * 0.33,
             begin: 0,
             end: 1
         })
         .addTransition(cash5, {
             property: 'translateY',
             beginValue: panelHeight * 1.5,
-            endValue: 0,
+            endValue: panelHeight * 0.33,
             begin: 0,
             end: 1
         });
 
-    // flip entire panel to other side, hide 'crisp', reveal 'flexible'
+    // flip entire panel to other side, tuck cash in.
     controller.addScene()
         .addTransition(panel, {
             property: 'rotateY',
@@ -351,6 +386,73 @@ document.addEventListener('DOMContentLoaded', function() {
             endValue: 180,
             begin: 0,
             end: 1
+        })
+        .addTransition(cash1, {
+            property: 'translateY',
+            beginValue: panelHeight * 0.33,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cash2, {
+            property: 'translateY',
+            beginValue: panelHeight * 0.33,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        }).addTransition(cash3, {
+            property: 'translateY',
+            beginValue: panelHeight * 0.33,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        }).addTransition(cash4, {
+            property: 'translateY',
+            beginValue: panelHeight * 0.33,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        }).addTransition(cash5, {
+            property: 'translateY',
+            beginValue: panelHeight * 0.33,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cashImageRight1, {
+            property: 'rotateZ',
+            beginValue: 30,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cashImageRight2, {
+            property: 'rotateZ',
+            beginValue: 30,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cashImageRight3, {
+            property: 'rotateZ',
+            beginValue: 30,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cashImageRight4, {
+            property: 'rotateZ',
+            beginValue: 30,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
+        })
+        .addTransition(cashImageRight5, {
+            property: 'rotateZ',
+            beginValue: 30,
+            endValue: 0,
+            begin: 0.25,
+            end: 0.5
         });
 
     // Bring up cards
@@ -664,7 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function randomCash() {
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 17; i++) {
         var srcSelector = Math.round(Math.random());
         var src = 'assets/images/cash-front.svg';
         if (srcSelector) {
@@ -675,17 +777,18 @@ function randomCash() {
         div.className = 'rain';
 
         var top = Math.random() * _windowHeight;
-        var left = Math.random() * _windowWidth - 250;
-        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px)';
+        var left = Math.random() * _windowWidth;
+        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
+        var blurRadius = (1 - randomScale) * 4;
+
+        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
 
-        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
-        var blurRadius = (1 - randomScale) * 4;
-        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg) translateZ(' + randomScale + 'px)';
+        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
         img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
@@ -694,8 +797,8 @@ function randomCash() {
 }
 
 function randomCards() {
-    for (var i = 0; i < 20; i++) {
-        var srcSelector = Math.round(Math.random() * 5);
+    for (var i = 0; i < 17; i++) {
+        var srcSelector = Math.round(Math.random() * 4);
         var src = 'assets/images/credit-card.svg';
         switch (srcSelector) {
             case 1:
@@ -710,30 +813,28 @@ function randomCards() {
             case 4:
                 src = 'assets/images/drivers-license-card.svg';
                 break;
-            case 5:
-                src = 'assets/images/cash-front.svg';
-                break;
         }
 
         var topSeed = Math.random();
         var top = topSeed * _windowHeight;
         var maxWidth = (1 - topSeed) * _windowWidth;
         var halfMaxWidth = maxWidth * 0.5;
-        var left = (_windowWidth * 0.5) + (Math.random() * (halfMaxWidth - (-1 * halfMaxWidth)) + (-1 * halfMaxWidth)) - 250;
+        var left = (_windowWidth * 0.5) + (Math.random() * (halfMaxWidth - (-1 * halfMaxWidth)) + (-1 * halfMaxWidth));
+        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
+        var blurRadius = (1 - randomScale) * 3;
 
         var div = document.createElement('div');
         div.className = 'rain';
 
-        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px)';
+        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
 
-        var randomScale = (Math.random() * (1 - 0.33) + 0.33);
-        var blurRadius = (1 - randomScale) * 3;
-        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg) translateZ(' + randomScale + 'px)';
+
+        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
         img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
