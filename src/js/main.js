@@ -902,7 +902,7 @@ function randomCash() {
         img.style.height = '100%';
 
         img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
-        img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
+        // img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
         document.getElementById('cash-container').appendChild(div);
@@ -948,7 +948,7 @@ function randomCards() {
 
 
         img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
-        img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
+        // img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
 
         div.appendChild(img);
         document.getElementById('card-container').appendChild(div);
