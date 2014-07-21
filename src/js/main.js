@@ -109,11 +109,19 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)';
     });
 
-    var bandLeft = document.getElementById('band-profile-left');
-    bandLeft.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * -0.04) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
+    var cardZ = panelHeight * -0.065;
+    var bandZ = (cardZ - 1) * -1;
+    var eachCard = cardZ / 6;
+    var licenseCard = document.getElementById('drivers-license-card');
+    licenseCard.style.webkitTransform = 'rotateY(180deg) translateX(-5000px) translateZ(' + cardZ + 'px)';
+    var bandEl = document.getElementById('back-band');
+    bandEl.style.webkitTransform = 'rotateY(180deg) translateZ(' + bandZ + 'px)';
 
-    var bandRight = document.getElementById('band-profile-right');
-    bandRight.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * 0.06) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
+    // var bandLeft = document.getElementById('band-profile-left');
+    // bandLeft.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * -0.04) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
+
+    // var bandRight = document.getElementById('band-profile-right');
+    // bandRight.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * 0.06) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
 
     randomCash();
     randomCards();
