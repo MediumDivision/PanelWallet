@@ -23,6 +23,10 @@ controller.onChangeScene = function(newSceneIndex) {
 
 };
 
+var logo = controller.addActor('#logo');
+var kickstarterLogo = controller.addActor('#kickstarter-logo');
+
+
 var panel = controller.addActor('#panel');
 var jeans = controller.addActor('#jeans');
 var jeansPocket = controller.addActor('#jeans-pocket');
@@ -105,19 +109,30 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateZ(' + Math.floor(panelHeight / 2) + 'px)';
     });
 
-    document.addEventListener('webkitAnimationIteration', function(e) {
-        var srcElement = e.srcElement;
+    var bandLeft = document.getElementById('band-profile-left');
+    bandLeft.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * -0.04) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
 
-        if (srcElement.className.indexOf('destroy') >= 0) {
-            document.getElementById('animation-container').removeChild(srcElement);
-        }
-    });
+    var bandRight = document.getElementById('band-profile-right');
+    bandRight.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * 0.06) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
 
     randomCash();
     randomCards();
 
     // Cash rain
-    controller.addScene();
+    controller.addScene()
+        .addTransition(logo, {
+            property: 'scale',
+            beginValue: 1,
+            endValue: 0.75,
+            begin: 0.9,
+            end: 1
+        }).addTransition(kickstarterLogo, {
+            property: 'scale',
+            beginValue: 1,
+            endValue: 0.75,
+            begin: 0.9,
+            end: 1
+        });
 
     // Card rain
     controller.addScene();
@@ -157,6 +172,83 @@ document.addEventListener('DOMContentLoaded', function() {
             endValue: -0.75 * panelHeight,
             begin: 0.5,
             end: 1.0
+        })
+        .addTransition(cash1, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(cash2, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(cash3, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(cash4, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(cash5, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card1, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card2, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card3, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card4, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card5, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
+        })
+        .addTransition(card6, {
+            property: 'translateX',
+            beginValue: -2 * _windowWidth,
+            endValue: -2 * _windowWidth,
+            begin: 0,
+            end: 0
         });
 
     // Bring up cash
@@ -757,6 +849,19 @@ document.addEventListener('DOMContentLoaded', function() {
             beginValue: 0,
             endValue: -1 * _windowHeight,
             begin: 0,
+            end: 1
+        })
+        .addTransition(logo, {
+            property: 'scale',
+            beginValue: 0.75,
+            endValue: 1,
+            begin: 0.95,
+            end: 1
+        }).addTransition(kickstarterLogo, {
+            property: 'scale',
+            beginValue: 0.75,
+            endValue: 1,
+            begin: 0.95,
             end: 1
         });
 

@@ -14,6 +14,11 @@ body {
     background-color: #FFFFFF;
     color: #2F2F2F;
     font-size: 2em;
+    pointer-events: none;
+}
+
+a, iframe {
+    pointer-events: auto;
 }
 
 #header {
@@ -21,29 +26,62 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1001;
     height: 3em;
-    line-height: 3em;
+    line-height: 2em;
+}
+
+#header div {
+    height: 100%;
+    width: auto;
+    height: 2em;
+    margin: 0.5em 1em;
 }
 
 #header img {
+    display: inline-block;
+    vertical-align: middle;
     height: 100%;
     width: auto;
-    margin: 1em;
+}
+
+#kickstarter-logo img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 50%;
+    width: auto;
+}
+
+#header span {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 100;
+    color: #FFF;
+    font-size: .8em;
+}
+
+#sub-header {
+    background-color: #3f3f3f;
+    height: 2.6em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 #video-header {
-    background-color: #E92042;
-    border-bottom: 10px solid #B81E38;
+    background-color: #2f2f2f;
+    border-bottom: 10px solid #3f3f3f;
+    z-index: 999;
 }
 
 #photo-gallery {
-    background-image: url('assets/images/asfalt.png');
-    background-position: top left;
-    border-top: 10px solid #3f3f3f;
+    background-color: #2f2f2f;
     float: left;
     height: auto;
     -webkit-transform: translateZ(600px);
+    z-index: 1000;
 }
 
 #photo-gallery div {
@@ -82,8 +120,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -330px;
-    margin-top: -210px;
+    margin-left: -350px;
+    margin-top: -204px;
     border: 10px solid white;
 }
 
@@ -132,6 +170,10 @@ body {
     -webkit-backface-visibility: hidden;
 }
 
+#cards-profile {
+    margin-top: -5.5%;
+}
+
 #side-panel img {
     position: absolute;
     top: 0;
@@ -153,10 +195,11 @@ body {
     top: 50%;
     margin-top: -7%;
     -webkit-transform: translateZ(7px);
+    -webkit-backface-visibility: hidden;
 }
 
 #panel #back-band {
-    -webkit-transform: rotateY(180deg) translateZ(7px);
+    -webkit-transform: rotateY(180deg) translateZ(16px);
 }
 
 .cash {
@@ -214,7 +257,7 @@ body {
 }
 
 #drivers-license-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-6px);
+    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-15px);
 }
 
 #cash1 {
@@ -275,16 +318,21 @@ body {
 }
 
 #photo-gallery .copy {
+    display: inline-block;
     width: 100%;
     background-color: transparent;
     color: #FFF;
-    float: left;
-    clear: both;
     position: relative;
     margin: 0;
     text-shadow: none;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 100;
+    height: 3em;
+    line-height: 2em;
+    border-bottom: none;
+    padding: 0.5em;
+    vertical-align: middle;
+    margin-top: 2em;
 }
 
 .center {
@@ -389,4 +437,14 @@ body {
 .cashImgLeft {
     -webkit-backface-visibility: hidden;
     -webkit-transform-origin: center right;
+}
+
+#logo {
+    float: left;
+    -webkit-transform-origin: left top;
+}
+
+#kickstarter-logo {
+    float: right;
+    -webkit-transform-origin: right top;
 }

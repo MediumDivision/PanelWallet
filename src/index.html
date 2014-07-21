@@ -7,18 +7,19 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="//use.typekit.net/eyq8qst.js"></script>
-    <script type="text/javascript">
-    try {
-        Typekit.load();
-    } catch (e) {}
-    </script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 
 <body>
 
+    <div id="sub-header"></div>
     <div id="header">
-        <img src="assets/images/panel-logo.svg" style="float: left" />
-        <img src="assets/images/kickstarter-badge-funded.png" style="float: right" />
+        <div id="logo">
+            <img src="assets/images/panel-logo-white.svg" />
+        </div>
+        <div id="kickstarter-logo">
+            <span>Live on&nbsp;</span><a href="kickstarter.com"><img src="assets/images/kickstarter-logo-grey.png" /></a>
+        </div>
     </div>
 
     <div id="rfid-container">
@@ -43,9 +44,10 @@
 
     <div id="panel">
 
-        <div class="profile" id="band-profile">
-            <img src="assets/images/panel-profile-band.svg" height="100%" />
+        <div class="profile" id="band-profile-left">
+            <img src="assets/images/panel-profile-band-left.svg" height="100%" />
         </div>
+
         <div class="profile" id="cards-profile">
             <img src="assets/images/panel-profile-cards.svg" height="100%" />
         </div>
@@ -110,6 +112,7 @@
 
         <div id="front-band" class='band'>
             <img src="assets/images/band-with-logo.svg" width="100%" />
+            <img id='band-profile-right' src="assets/images/panel-profile-band-right.svg" height="100%" />
         </div>
 
     </div>
@@ -119,7 +122,7 @@
     </div>
 
     <div id="video-header" class="scene">
-        <iframe src="//player.vimeo.com/video/100678188?byline=0&amp;portrait=0&amp;color=ffffff" width="650" height="410" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe src="//player.vimeo.com/video/100678188?byline=0&amp;portrait=0&amp;color=ffffff" width="700" height="408" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </div>
 
     <div id="make-it-rain" class="scene">
