@@ -879,7 +879,7 @@ function randomCash() {
         var randomScale = (Math.random() * (1 - 0.33) + 0.33);
         var blurRadius = (1 - randomScale) * 4;
 
-        div.style[controller._vendorPrefix.js + 'Transform'] = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
+        div.style.transform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
         window.console.log(controller._vendorPrefix.js + 'Transform');
 
         var img = document.createElement('img');
@@ -887,7 +887,7 @@ function randomCash() {
         img.style.width = '100%';
         img.style.height = '100%';
 
-        img.style[controller._vendorPrefix.js + 'Transform'] = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
+        img.style.transform= 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
 
         div.appendChild(img);
         document.getElementById('cash-container').appendChild(div);
@@ -923,13 +923,13 @@ function randomCards() {
 
         var div = document.createElement('div');
         div.className = 'rain';
-        div.style[controller._vendorPrefix.js + 'Transform'] = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
+        div.style.transform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
-        img.style[controller._vendorPrefix.js + 'Transform'] = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
+        img.style.transform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
 
         div.appendChild(img);
         document.getElementById('card-container').appendChild(div);
