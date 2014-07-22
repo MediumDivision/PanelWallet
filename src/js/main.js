@@ -26,7 +26,6 @@ controller.onChangeScene = function(newSceneIndex) {
 var logo = controller.addActor('#logo');
 var kickstarterLogo = controller.addActor('#kickstarter-logo');
 
-
 var panel = controller.addActor('#panel');
 var jeans = controller.addActor('#jeans');
 var jeansPocket = controller.addActor('#jeans-pocket');
@@ -122,9 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // var bandRight = document.getElementById('band-profile-right');
     // bandRight.style.webkitTransform = 'rotateX(90deg) rotateZ(90deg) translateX(' + Math.floor(panelHeight * 0.06) + 'px) translateZ(' + Math.floor(panelHeight * 0.095) + 'px)';
-
-    randomCash();
-    randomCards();
 
     // Cash rain
     controller.addScene()
@@ -858,28 +854,17 @@ document.addEventListener('DOMContentLoaded', function() {
             endValue: -1 * _windowHeight,
             begin: 0,
             end: 1
-        })
-        .addTransition(logo, {
-            property: 'scale',
-            beginValue: 0.75,
-            endValue: 1,
-            begin: 0.95,
-            end: 1
-        }).addTransition(kickstarterLogo, {
-            property: 'scale',
-            beginValue: 0.75,
-            endValue: 1,
-            begin: 0.95,
-            end: 1
         });
 
     controller.initialize();
+    randomCash();
+    randomCards();
     controller.action(); //!
 
 });
 
 function randomCash() {
-    for (var i = 0; i < 17; i++) {
+    for (var i = 0; i < 15; i++) {
         var srcSelector = Math.round(Math.random());
         var src = 'assets/images/cash-front.svg';
         if (srcSelector) {
@@ -894,15 +879,15 @@ function randomCash() {
         var randomScale = (Math.random() * (1 - 0.33) + 0.33);
         var blurRadius = (1 - randomScale) * 4;
 
-        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
+        div.style[controller._vendorPrefix.js + 'Transform'] = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
+        window.console.log(controller._vendorPrefix.js + 'Transform');
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
 
-        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
-        // img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
+        img.style[controller._vendorPrefix.js + 'Transform'] = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
 
         div.appendChild(img);
         document.getElementById('cash-container').appendChild(div);
@@ -910,7 +895,7 @@ function randomCash() {
 }
 
 function randomCards() {
-    for (var i = 0; i < 17; i++) {
+    for (var i = 0; i < 15; i++) {
         var srcSelector = Math.round(Math.random() * 4);
         var src = 'assets/images/credit-card.svg';
         switch (srcSelector) {
@@ -938,17 +923,13 @@ function randomCards() {
 
         var div = document.createElement('div');
         div.className = 'rain';
-
-        div.style.webkitTransform = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
+        div.style[controller._vendorPrefix.js + 'Transform'] = 'translateX(' + left + 'px) translateY(' + top + 'px) translateZ(' + randomScale * 5 + 'px)';
 
         var img = document.createElement('img');
         img.src = src;
         img.style.width = '100%';
         img.style.height = '100%';
-
-
-        img.style.webkitTransform = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
-        // img.style.webkitFilter = 'blur(' + blurRadius + 'px)';
+        img.style[controller._vendorPrefix.js + 'Transform'] = 'scale(' + randomScale + ') rotate(' + Math.random() * 180 + 'deg)';
 
         div.appendChild(img);
         document.getElementById('card-container').appendChild(div);

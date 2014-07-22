@@ -1,5 +1,38 @@
 @import (inline) "../css/normalize.css";
 
+.transform(@string) {
+    -webkit-transform: @string;
+    -moz-transform: @string;
+    -ms-transform: @string;
+    -o-transform: @string;
+    transform: @string;
+}
+
+.transformOrigin(@string) {
+    -webkit-transform-origin: @string;
+    -moz-transform-origin: @string;
+    -ms-transform-origin: @string;
+    -o-transform-origin: @string;
+    transform-origin: @string;
+}
+
+.transformStyle(@string) {
+    -webkit-transform-style: @string;
+    -moz-transform-style: @string;
+    -ms-transform-style: @string;
+    -o-transform-style: @string;
+    transform-style: @string;
+}
+
+.backfaceVisibility(@string) {
+    -webkit-backface-visibility: @string;
+    -moz-backface-visibility: @string;
+    -ms-backface-visibility: @string;
+    -o-backface-visibility: @string;
+    backface-visibility: @string;
+}
+
+
 /* apply a natural box layout model to all elements */
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
@@ -14,7 +47,6 @@ body {
     background-color: #FFFFFF;
     color: #2F2F2F;
     font-size: 2em;
-    pointer-events: none;
 }
 
 a, iframe {
@@ -77,18 +109,35 @@ a, iframe {
 }
 
 #photo-gallery {
+    position: relative;
     background-color: #2f2f2f;
     float: left;
     height: auto;
-    -webkit-transform: translateZ(600px);
-    z-index: 1000;
+    z-index: 1002;
+    min-height: 100%;
+
+    .transform(translateZ(600px));
 }
 
 #photo-gallery div {
+    position: relative;
     float: left;
     width: 20%;
     margin-left: 4%;
     margin-top: 4%;
+
+    span {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: #000;
+        line-height: 0.7em;
+        height: 2em;
+        font-size: 0.6em;
+        font-weight: 100;
+    }
 }
 
 #photo-gallery img {
@@ -100,6 +149,21 @@ a, iframe {
 #photo-gallery .footer {
     width: 100%;
     height: 3em;
+    line-height: 3em;
+    margin: 2em 0 0 0;
+    padding-left: 4%;
+    background-color: #3f3f3f;
+
+    a {
+        text-decoration: none;
+    }
+
+    img {
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: middle;
+    }
 }
 
 .rain {
@@ -109,11 +173,12 @@ a, iframe {
     width: 30%;
     height: 20%;
     margin-left: -15%;
-    -webkit-transform-origin: center;
+
+    .transformOrigin(center);
 }
 
 .rain img {
-    -webkit-transform-origin: center;
+    .transformOrigin(center);
 }
 
 #video-header iframe {
@@ -131,7 +196,6 @@ a, iframe {
     width: 100%;
     top: 0;
     left: 0;
-    /*-webkit-transform: translateZ(-900px);*/
     opacity: 1;
     background-color: transparent;
 }
@@ -142,7 +206,6 @@ a, iframe {
     width: 100%;
     top: 0;
     left: 0;
-    /*-webkit-transform: translateZ(-800px);*/
     opacity: 1;
     background-color: transparent;
 }
@@ -153,29 +216,31 @@ a, iframe {
     text-align: center;
     top: 50%;
     left: 50%;
-    -webkit-transform: scale(0.5) translateY(2000px) translateZ(0px);
+
+    .transform(scale(0.5) translateY(2000px) translateZ(0px));
 }
 
 #panel div {
     position: absolute;
 }
 
-/* TODO: This already looks pretty cool, but it definitely needs to be perfected */
 .profile {
     height: 135%;
     width: 11.7%;
     left: 50%;
     margin-left: -5.85%;
     margin-top: -13.25%;
-    -webkit-backface-visibility: hidden;
+
+    .backfaceVisibility(hidden);
 }
 
 #cards-profile {
     position: absolute;
-    -webkit-transform: rotateX(90deg) rotateZ(90deg);
     height: 171.6%;
     bottom: 14%;
     left: 43.9%;
+
+    .transform(rotateX(90deg) rotateZ(90deg));
 }
 
 #side-panel img {
@@ -187,23 +252,24 @@ a, iframe {
 #panel .panel {
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
+
+    .backfaceVisibility(hidden);
 }
 
 #back-panel {
-    -webkit-transform: rotateY(180deg);
+    .transform(rotateY(180deg));
 }
 
 #panel .band {
     width: 100%;
     top: 50%;
     margin-top: -7%;
-    -webkit-transform: translateZ(7px);
-    /*-webkit-backface-visibility: hidden;*/
+
+    .transform(translateZ(7px));
 }
 
 #panel #back-band {
-    -webkit-transform: rotateY(180deg) translateZ(16px);
+    .transform(rotateY(180deg) translateZ(16px));
 }
 
 .cash {
@@ -211,8 +277,9 @@ a, iframe {
     width: 169%;
     top: 2%;
     left: -77%;
-    -webkit-transform: translateX(-5000px) translateZ(5px); /* Arbitrary, just move them off the screen */
-    -webkit-backface-visibility: hidden;
+
+    .transform(translateX(-5000px) translateZ(5px));
+    .backfaceVisibility(hidden);
 }
 
 .cashImgRight {
@@ -225,7 +292,8 @@ a, iframe {
     position: absolute;
     top: 0;
     left: 1px;
-    -webkit-transform-origin: center right;
+
+    .transformOrigin(center right);
 }
 
 .card {
@@ -233,55 +301,56 @@ a, iframe {
     width: 96%;
     top: 10.5%;
     left: 2%;
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(1px);
+
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(1px));
 }
 
 .card img {
-    -webkit-transform: rotateZ(180deg);
+    .transform(rotateZ(180deg));
 }
 
 #coin-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-1px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-1px));
 }
 
 #credit-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-2px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-2px));
 }
 
 #bank-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-3px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-3px));
 }
 
 #transit-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-4px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-4px));
 }
 
 #insurance-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-5px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-5px));
 }
 
 #drivers-license-card {
-    -webkit-transform: rotateY(180deg) translateX(-5000px) translateZ(-29px);
+    .transform(rotateY(180deg) translateX(-5000px) translateZ(-29px));
 }
 
 #cash1 {
-    -webkit-transform: translateX(-5000px) translateZ(1px);
+    .transform(translateX(-5000px) translateZ(1px));
 }
 
 #cash2 {
-    -webkit-transform: translateX(-5000px) translateZ(2px);
+    .transform(translateX(-5000px) translateZ(2px));
 }
 
 #cash3 {
-    -webkit-transform: translateX(-5000px) translateZ(3px);
+    .transform(translateX(-5000px) translateZ(3px));
 }
 
 #cash4 {
-    -webkit-transform: translateX(-5000px) translateZ(4px);
+    .transform(translateX(-5000px) translateZ(4px));
 }
 
 #cash5 {
-    -webkit-transform: translateX(-5000px) translateZ(5px);
+    .transform(translateX(-5000px) translateZ(5px));
 }
 
 .copy {
@@ -291,7 +360,8 @@ a, iframe {
     padding: 1em;
     position: absolute;
     text-align: center;
-    -webkit-transform: translateZ(999px);
+
+    .transform(translateZ(999px));
 }
 
 .body {
@@ -322,7 +392,7 @@ a, iframe {
 }
 
 #photo-gallery .copy {
-    display: inline-block;
+    display: block;
     width: 100%;
     background-color: transparent;
     color: #FFF;
@@ -336,7 +406,19 @@ a, iframe {
     border-bottom: none;
     padding: 0.5em;
     vertical-align: middle;
-    margin-top: 2em;
+    margin: 1em 0;
+
+    a {
+        text-decoration: none;
+
+        img {
+            display: inline-block;
+            vertical-align: middle;
+            height: 1em;
+            width: auto;
+            border-radius: 0;
+        }
+    }
 }
 
 .center {
@@ -413,7 +495,8 @@ a, iframe {
     left: 50%;
     width: 50%;
     opacity: 0;
-    -webkit-transform: translateZ(-500px);
+
+    .transform(translateZ(-500px));
 }
 
 #jeans-pocket {
@@ -422,7 +505,8 @@ a, iframe {
     left: 50%;
     width: 50%;
     opacity: 0;
-    -webkit-transform: translateZ(500px);
+
+    .transform(translateZ(500px));
 }
 
 .scene {
@@ -434,21 +518,24 @@ a, iframe {
 }
 
 .actor {
-    -webkit-transform-origin: center;
-    -webkit-transform-style: preserve-3d;
+    pointer-events: none;
+
+    .transformOrigin(center);
+    .transformStyle(preserve-3d);
 }
 
 .cashImgLeft {
-    -webkit-backface-visibility: hidden;
-    -webkit-transform-origin: center right;
+    .backfaceVisibility(hidden);
+    .transformOrigin(center right);
 }
 
 #logo {
     float: left;
-    -webkit-transform-origin: left top;
+    .transformOrigin(left top);
 }
 
 #kickstarter-logo {
     float: right;
-    -webkit-transform-origin: right top;
+    .transformOrigin(right top);
 }
+
