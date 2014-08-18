@@ -170,6 +170,7 @@
         for (i = 0; i < this._renderQueue.length; i++) {
             actor = this._renderQueue[i];
             actor.$el.style.transform = actor.compileTransformString();
+            actor.$el.style.webkitTransform = actor.compileTransformString();
             actor.$el.style.opacity = actor.properties.opacity;
         }
 
